@@ -1,0 +1,12 @@
+{
+  "name": "@bytewarden/nx-plugin",
+  "version": "0.0.1",
+  "description": "Custom Nx tools like generators and executors for Bytewarden projects",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "GPL-3.0",
+  "author": "Convex Works",
+  "generators": "./generators.json"
+}

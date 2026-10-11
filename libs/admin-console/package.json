@@ -1,0 +1,21 @@
+{
+  "name": "@bytewarden/admin-console",
+  "version": "0.0.0",
+  "description": "Common code used across Bytewarden JavaScript projects.",
+  "keywords": [
+    "bytewarden"
+  ],
+  "author": "Convex Works",
+  "homepage": "https://bitwarden.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitwarden/clients"
+  },
+  "license": "GPL-3.0",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "build:watch": "npm run clean && tsc -watch",
+    "test": "jest"
+  }
+}

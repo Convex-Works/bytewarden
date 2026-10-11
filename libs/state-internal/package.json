@@ -1,0 +1,11 @@
+{
+  "name": "@bytewarden/state-internal",
+  "version": "0.0.1",
+  "description": "The internal parts of @bytewarden/state that should not be used by other teams.",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "GPL-3.0",
+  "author": "Convex Works"
+}

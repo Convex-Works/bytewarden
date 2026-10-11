@@ -1,0 +1,43 @@
+﻿@-webkit-keyframes bytewardenfill {
+  0% {
+    -webkit-transform: scale(1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.2, 1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+@-moz-keyframes bytewardenfill {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+span[data-bwautofill].com-bytewarden-browser-animated-fill {
+  display: inline-block;
+}
+
+.com-bytewarden-browser-animated-fill {
+  animation: bytewardenfill 200ms ease-in-out 0ms 1;
+  -webkit-animation: bytewardenfill 200ms ease-in-out 0ms 1;
+}
+
+@media (prefers-reduced-motion) {
+  .com-bytewarden-browser-animated-fill {
+    animation: none;
+    -webkit-animation: none;
+  }
+}

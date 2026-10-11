@@ -1,0 +1,9 @@
+Bytewarden source code is licensed under the GNU General Public License,
+version 3. See LICENSE_GPL.txt for the complete license.
+
+Based on Bitwarden's GPL browser extension and shared client libraries.
+Original copyright notices and third-party licenses remain applicable.
+See NOTICE.txt for source provenance and modification attribution.
+
+Commercial modules and the commercial SDK are not included in this repository.
+No rights to Bitwarden trademarks, service marks, or logos are granted.

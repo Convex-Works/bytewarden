@@ -1,0 +1,15 @@
+{
+  "name": "@bytewarden/assets",
+  "version": "0.0.1",
+  "description": "Assets used in Bytewarden clients",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "GPL-3.0",
+  "author": "Convex Works",
+  "scripts": {
+    "test": "jest"
+  },
+  "sideEffects": false
+}

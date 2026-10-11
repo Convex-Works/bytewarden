@@ -1,0 +1,65 @@
+// FIXME: Update this file to be type safe and remove this and next line
+// @ts-strict-ignore
+import { AuthType } from "../../types/auth-type";
+import { SendType } from "../../types/send-type";
+import { SendFileApi } from "../api/send-file.api";
+import { SendItemApi } from "../api/send-item.api";
+import { SendTextApi } from "../api/send-text.api";
+import { Send } from "../domain/send";
+
+export class SendRequest {
+  type: SendType;
+  fileLength?: number;
+  name: string;
+  notes: string;
+  key: string;
+  maxAccessCount?: number;
+  expirationDate: string;
+  deletionDate: string;
+  text: SendTextApi;
+  file: SendFileApi;
+  data: SendItemApi;
+  password: string;
+  emails: string;
+  disabled: boolean;
+  hideEmail: boolean;
+  authType: AuthType;
+
+  constructor(send: Send, fileLength?: number) {
+    this.type = send.type;
+    this.fileLength = fileLength;
+    this.name = send.name ? send.name.encryptedString : null;
+    this.notes = send.notes ? send.notes.encryptedString : null;
+    this.maxAccessCount = send.maxAccessCount;
+    this.expirationDate = send.expirationDate != null ? send.expirationDate.toISOString() : null;
+    this.deletionDate = send.deletionDate != null ? send.deletionDate.toISOString() : null;
+    this.key = send.key != null ? send.key.encryptedString : null;
+    this.password = send.password;
+    this.emails = send.emails;
+    this.disabled = send.disabled;
+    this.hideEmail = send.hideEmail;
+    this.authType = send.authType;
+
+    switch (this.type) {
+      case SendType.Text:
+        this.text = new SendTextApi();
+        this.text.text = send.text.text != null ? send.text.text.encryptedString : null;
+        this.text.hidden = send.text.hidden;
+        break;
+      case SendType.File:
+        this.file = new SendFileApi();
+        this.file.fileName = send.file.fileName != null ? send.file.fileName.encryptedString : null;
+        break;
+      case SendType.Item:
+        if (send.data?.data == null) {
+          throw new Error("Item Send is missing its item data");
+        }
+        this.data = new SendItemApi();
+        this.data.encryptionVersion = send.data.encryptionVersion;
+        this.data.data = JSON.stringify(send.data.data);
+        break;
+      default:
+        break;
+    }
+  }
+}

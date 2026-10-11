@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Documentation/Responsive Design" />
+
+# Responsive Design
+
+Bytewarden supports the following breakpoints:
+
+| Breakpoint prefix | Minimum width |
+| ----------------- | ------------- |
+| `sm`              | 640px         |
+| `md`              | 768px         |
+| `lg`              | 1024px        |
+| `xl`              | 1280px        |
+| `2xl`             | 1536px        |
+
+These can be used to conditionally apply other Tailwind classes at specific screen sizes. Find more
+info in the [Tailwind docs](https://tailwindcss.com/docs/responsive-design).
+
+## Example
+
+```html
+<!-- Width of 16 by default, 32 on medium screens, and 48 on large screens -->
+<img class="tw-w-16 md:tw-w-32 lg:tw-w-48" src="..." />
+```
+
+<img
+  class="tw-w-16 md:tw-w-32 lg:tw-w-48"
+  alt="Bytewarden logo"
+  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjYyIiBoZWlnaHQ9IjYyIiByeD0iMTQiIGZpbGw9IiMwMDAwMDAiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIyIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNiA2KSBzY2FsZSguODEyNSkiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyIDRIMTZBNCA0IDAgMCAxIDIwIDhWMjBINDBBMTYgMTYgMCAwIDEgNTYgMzZWNDRBMTYgMTYgMCAwIDEgNDAgNjBIMTJBNCA0IDAgMCAxIDggNTZWOEE0IDQgMCAwIDEgMTIgNFpNMzYgNDIuOTNBOCA4IDAgMSAwIDI4IDQyLjkzVjUySDM2WiIvPjwvZz48L3N2Zz4="
+/>

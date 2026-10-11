@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Bytewarden branding preview</title>
+    <link rel="stylesheet" href="../apps/browser/build/popup/main.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #eeeeee;
+        font:
+          14px Inter,
+          Arial,
+          sans-serif;
+        color: #000;
+      }
+      main {
+        max-width: 1000px;
+        margin: auto;
+        padding: 48px 32px;
+      }
+      h1 {
+        font-size: 28px;
+        letter-spacing: -1px;
+        margin: 0 0 8px;
+      }
+      .hint {
+        color: #525252;
+        margin: 0 0 32px;
+      }
+      .panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+      .panel {
+        background: var(--color-bg-primary);
+        color: var(--color-fg-heading);
+        border: 1px solid var(--color-border-base);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .panel header {
+        padding: 24px;
+        border-bottom: 1px solid var(--color-border-base);
+      }
+      svg {
+        width: 180px;
+        display: block;
+        fill: currentColor;
+      }
+      .panel section {
+        padding: 24px;
+      }
+      h2 {
+        font-size: 20px;
+        letter-spacing: -0.4px;
+        margin: 0 0 8px;
+      }
+      p {
+        line-height: 1.6;
+      }
+      .muted {
+        color: var(--color-fg-body-subtle);
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 24px;
+      }
+      input {
+        display: block;
+        margin: 8px 0 16px;
+        padding: 12px;
+        width: 100%;
+        border: 1px solid var(--color-border-base);
+        border-radius: 8px;
+        background: var(--color-bg-primary);
+        color: var(--color-fg-heading);
+        font: inherit;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--color-border-brand);
+        border-radius: 8px;
+        background: var(--color-bg-brand);
+        color: var(--color-fg-contrast);
+        font:
+          600 14px Inter,
+          Arial,
+          sans-serif;
+      }
+      button:focus-visible {
+        outline: 2px solid var(--color-fg-brand);
+        outline-offset: 3px;
+      }
+      .icons {
+        margin: 32px 0;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .icons img {
+        image-rendering: auto;
+      }
+      .caption {
+        color: #525252;
+        font-size: 12px;
+      }
+      .theme_dark svg {
+        color: #fff;
+      }
+      @media (max-width: 640px) {
+        main {
+          padding: 24px 16px;
+        }
+        .panels {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Bytewarden</h1>
+      <p class="hint">Logo and extension theme preview · Designed by Claude Opus 5.5</p>
+      <div class="panels">
+        <article class="panel theme_light">
+          <header>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 280 64"
+              role="img"
+              aria-label="Bytewarden"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M12 4H16A4 4 0 0 1 20 8V20H40A16 16 0 0 1 56 36V44A16 16 0 0 1 40 60H12A4 4 0 0 1 8 56V8A4 4 0 0 1 12 4ZM36 42.93A8 8 0 1 0 28 42.93V52H36Z"
+              />
+              <text
+                x="72"
+                y="43"
+                fill="currentColor"
+                font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+                font-size="32"
+                font-weight="600"
+                letter-spacing="-0.32"
+              >
+                bytewarden
+              </text>
+            </svg>
+          </header>
+          <section>
+            <h2>Your vault, within reach.</h2>
+            <p class="muted">Passwords and passkeys in one secure place.</p>
+            <label
+              >Email address<input
+                type="email"
+                placeholder="you@example.com"
+                aria-label="Email address" /></label
+            ><button type="button">Continue</button>
+            <p class="muted">Light theme</p>
+          </section>
+        </article>
+        <article class="panel theme_dark">
+          <header>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 280 64"
+              role="img"
+              aria-label="Bytewarden"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M12 4H16A4 4 0 0 1 20 8V20H40A16 16 0 0 1 56 36V44A16 16 0 0 1 40 60H12A4 4 0 0 1 8 56V8A4 4 0 0 1 12 4ZM36 42.93A8 8 0 1 0 28 42.93V52H36Z"
+              />
+              <text
+                x="72"
+                y="43"
+                fill="currentColor"
+                font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+                font-size="32"
+                font-weight="600"
+                letter-spacing="-0.32"
+              >
+                bytewarden
+              </text>
+            </svg>
+          </header>
+          <section>
+            <h2>Your vault, within reach.</h2>
+            <p class="muted">Passwords and passkeys in one secure place.</p>
+            <label
+              >Email address<input
+                type="email"
+                placeholder="you@example.com"
+                aria-label="Email address" /></label
+            ><button type="button">Continue</button>
+            <p class="muted">Dark theme</p>
+          </section>
+        </article>
+      </div>
+      <div class="icons">
+        <img
+          src="../apps/browser/src/images/icon16.png"
+          width="16"
+          height="16"
+          alt="16 pixel toolbar icon"
+        /><img
+          src="../apps/browser/src/images/icon32.png"
+          width="32"
+          height="32"
+          alt="32 pixel icon"
+        /><img
+          src="../apps/browser/src/images/icon48.png"
+          width="48"
+          height="48"
+          alt="48 pixel icon"
+        /><img src="icon.png" width="96" height="96" alt="Bytewarden icon" />
+      </div>
+      <p class="caption">
+        The preview uses the extension's actual logo and theme tokens. Form fields are visual
+        samples.
+      </p>
+    </main>
+  </body>
+</html>

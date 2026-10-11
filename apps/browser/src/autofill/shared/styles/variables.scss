@@ -1,0 +1,95 @@
+$dark-icon-themes: "theme_dark";
+
+$font-family-sans-serif: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-source-code-pro: "Source Code Pro", monospace;
+$font-size-base: 14px;
+
+$text-color-light: #000000;
+$muted-text-color-light: #525252;
+$background-color-light: #ffffff;
+$background-offset-color-light: #f0f0f0;
+$brand-primary-light: #000000;
+$password-special-color-light: #b80017;
+$password-number-color-light: #000000;
+$success-color-light: #017e45;
+$error-color-light: #c83522;
+
+$text-color-dark: #ffffff;
+$muted-text-color-dark: #a3a3a3;
+$background-color-dark: #0a0a0a;
+$background-offset-color-dark: darken(#0a0a0a, 2.75%);
+$border-color-dark: #ddd;
+$brand-primary-dark: #ffffff;
+$password-special-color-dark: #ff8d85;
+$password-number-color-dark: #ffffff;
+$success-color-dark: #8db89b;
+$error-color-dark: #ee9792;
+
+$muted-blue: #737373;
+$muted-grey: #a3a3a3;
+$border-color: #d4d4d4;
+
+$border-radius: 3px;
+$focus-outline-color: #404040;
+
+$themes: (
+  light: (
+    textColor: $text-color-light,
+    mutedTextColor: $muted-text-color-light,
+    backgroundColor: $background-color-light,
+    backgroundOffsetColor: $background-offset-color-light,
+    primaryColor: $brand-primary-light,
+    buttonPrimaryColor: $brand-primary-light,
+    textContrast: $background-color-light,
+    inputBorderColor: darken($border-color-dark, 2.75%),
+    inputBackgroundColor: $background-color-light,
+    borderColor: $border-color,
+    focusOutlineColor: $focus-outline-color,
+    successColor: $success-color-light,
+    errorColor: $error-color-light,
+    passkeysAuthenticating: $muted-blue,
+    passwordSpecialColor: $password-special-color-light,
+    passwordNumberColor: $password-number-color-light,
+  ),
+  dark: (
+    textColor: $text-color-dark,
+    mutedTextColor: $muted-text-color-dark,
+    backgroundColor: $background-color-dark,
+    backgroundOffsetColor: $background-offset-color-dark,
+    buttonPrimaryColor: $brand-primary-dark,
+    primaryColor: $brand-primary-dark,
+    textContrast: $background-color-dark,
+    inputBorderColor: #404040,
+    inputBackgroundColor: $background-color-dark,
+    borderColor: #404040,
+    focusOutlineColor: lighten($focus-outline-color, 25%),
+    successColor: $success-color-dark,
+    errorColor: $error-color-dark,
+    passkeysAuthenticating: $muted-grey,
+    passwordSpecialColor: $password-special-color-dark,
+    passwordNumberColor: $password-number-color-dark,
+  ),
+);
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+    .theme_#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

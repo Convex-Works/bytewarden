@@ -1,0 +1,38 @@
+<popup-page>
+  <popup-header slot="header" pageTitle="{{ 'about' | i18n }}" showBackButton>
+    <ng-container slot="end">
+      <app-pop-out></app-pop-out>
+    </ng-container>
+  </popup-header>
+
+  <bit-item-group>
+    <bit-item>
+      <button type="button" bit-item-content (click)="troubleshoot()">
+        {{ "troubleshooting" | i18n }}
+      </button>
+    </bit-item>
+    <bit-item>
+      <button type="button" bit-item-content (click)="about()">
+        {{ "aboutBytewarden" | i18n }}
+      </button>
+    </bit-item>
+    <bit-item>
+      <button type="button" bit-item-content (click)="launchHelp()">
+        Documentation
+        <i slot="end" class="bwi bwi-external-link" aria-hidden="true"></i>
+      </button>
+    </bit-item>
+    <bit-item>
+      <button type="button" bit-item-content (click)="openWebVault()">
+        {{ "bitWebVaultApp" | i18n }}
+        <i slot="end" class="bwi bwi-external-link" aria-hidden="true"></i>
+      </button>
+    </bit-item>
+    <bit-item>
+      <button type="button" bit-item-content (click)="reportIssue()">
+        Report an issue
+        <i slot="end" class="bwi bwi-external-link" aria-hidden="true"></i>
+      </button>
+    </bit-item>
+  </bit-item-group>
+</popup-page>

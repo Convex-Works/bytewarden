@@ -1,0 +1,20 @@
+Bytewarden
+Copyright (C) 2026 Convex Works and Bytewarden contributors.
+
+This project contains modified GPL source from Bitwarden client applications.
+Copyright (C) 2015-2026 Bitwarden Inc. and the original contributors.
+All original copyright notices and third-party notices remain applicable.
+
+Upstream repository: https://github.com/bitwarden/clients
+Upstream tag: browser-v2026.9.3
+Upstream commit: 8246ae9c9a484a0a69f8b27203034555fb872523
+
+Modifications made October 11, 2026:
+- Extracted a browser-only GPL source snapshot; omitted commercial modules.
+- Removed the commercial SDK dependency and commercial build configurations.
+- Rebranded product names, local packages, identifiers, translations, and assets.
+- Applied a monochrome interface and original Claude Opus 5.5 logo design.
+- Configured independent extension identifiers, documentation, and build workflow.
+
+Bitwarden trademarks identify the upstream project and compatible services only.
+Bytewarden is not affiliated with or endorsed by Bitwarden Inc.

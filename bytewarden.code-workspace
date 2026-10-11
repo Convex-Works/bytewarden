@@ -1,0 +1,55 @@
+{
+  "folders": [
+    {
+      "name": "Bytewarden",
+      "path": ".",
+    },
+    {
+      "name": "browser",
+      "path": "apps/browser",
+    },
+    {
+      "name": "libs",
+      "path": "libs",
+    },
+  ],
+  "settings": {
+    "eslint.options": {
+      "overrideConfig": {
+        "parserOptions": {
+          "project": ["${workspaceFolder}/tsconfig.eslint.json"],
+        },
+      },
+    },
+    "debug.javascript.terminalOptions": {
+      "sourceMapPathOverrides": {
+        "webpack:///./~/*": "${workspaceFolder:Bytewarden}/node_modules/*",
+        "webpack://?:*/*": "${workspaceFolder}/*",
+      },
+    },
+    "jest.disabledWorkspaceFolders": ["browser", "libs"],
+    "jest.jestCommandLine": "npx jest",
+    "angular.enable-strict-mode-prompt": false,
+    "typescript.preferences.importModuleSpecifier": "project-relative",
+    "javascript.preferences.importModuleSpecifier": "project-relative",
+    "typescript.tsdk": "node_modules/typescript/lib",
+  },
+  "extensions": {
+    "recommendations": [
+      "orta.vscode-jest",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "Angular.ng-template",
+      "nick-rudenko.back-n-forth",
+      "streetsidesoftware.code-spell-checker",
+      "MS-vsliveshare.vsliveshare",
+      "mhutchie.git-graph",
+      "donjayamanne.githistory",
+      "eamodio.gitlens",
+      "rust-lang.rust-analyzer",
+      "tamasfe.even-better-toml",
+      "vadimcn.vscode-lldb",
+      "nrwl.angular-console",
+    ],
+  },
+}

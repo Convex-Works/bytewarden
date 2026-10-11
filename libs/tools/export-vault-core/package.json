@@ -1,0 +1,21 @@
+{
+  "name": "@bytewarden/vault-export-core",
+  "version": "0.0.0",
+  "description": "Home for all Bytewarden vault exporters.",
+  "keywords": [
+    "bytewarden"
+  ],
+  "author": "Convex Works",
+  "homepage": "https://bitwarden.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitwarden/clients"
+  },
+  "license": "GPL-3.0",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "build:watch": "npm run clean && tsc -watch",
+    "test": "jest"
+  }
+}
