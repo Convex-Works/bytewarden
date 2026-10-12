@@ -91,6 +91,37 @@ describe("DefaultSdkService", () => {
       );
     });
 
+    describe("client$ before a server URL is entered", () => {
+      it("omits the URLs from the SDK settings instead of passing null or undefined", async () => {
+        const environment = mock<Environment>();
+        environment.getApiUrl.mockReturnValue(null);
+        environment.getIdentityUrl.mockReturnValue(null);
+        environmentService.environment$ = new BehaviorSubject(environment);
+        sdkClientFactory.createSdkClient.mockResolvedValue(createMockClient());
+        service = new DefaultSdkService(
+          sdkClientFactory,
+          environmentService,
+          platformUtilsService,
+          accountService,
+          kdfConfigService,
+          keyService,
+          accountCryptographicStateService,
+          apiService,
+          fakeStateProvider,
+          configService,
+          upgradeTokenStateService,
+          mockManagedSettingsService(),
+        );
+
+        await firstValueFrom(service.client$);
+
+        const settings = sdkClientFactory.createSdkClient.mock.calls[0][1];
+        // The SDK treats a present-but-undefined key as null, so the keys must be absent.
+        expect(settings).not.toHaveProperty("apiUrl");
+        expect(settings).not.toHaveProperty("identityUrl");
+      });
+    });
+
     describe("given the user is logged in", () => {
       const userId = "0da62ebd-98bb-4f42-a846-64e8555087d7" as UserId;
       beforeEach(() => {

@@ -15,13 +15,25 @@
   font-weight: 100 900;
 }
 
+@font-face {
+  font-family: "JetBrains Mono";
+  src:
+    url("~@bytewarden/components/src/webfonts/jetbrains-mono.woff2") format("woff2")
+      tech(variations),
+    url("~@bytewarden/components/src/webfonts/jetbrains-mono.woff2") format("woff2-variations");
+  font-display: swap;
+  font-weight: 100 800;
+}
+
 /**
  * CSS variables
  */
 :root {
   --font-sans:
-    Inter, "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+    Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: Menlo, SFMono-Regular, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* Passwords, codes, and other fixed-width text use the brand's supporting typeface. */
+  --font-mono:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }

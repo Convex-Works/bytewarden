@@ -1,7 +1,19 @@
 {
-  "name": "Bytewarden — Password Manager",
-  "summary": "A minimal, open-source password manager with a black-and-white interface.",
-  "description": "Save passwords, generate strong credentials, and autofill logins with Bytewarden. Connect to your Bitwarden account or a compatible self-hosted server. Independently maintained by Convex Works under GPLv3.",
+  "name": "Bytewarden Password Manager",
+  "summary": "Open-source password manager for the server you choose. Save, generate, and autofill passwords and passkeys.",
+  "description": "Save passwords, passkeys, and cards in an end-to-end encrypted vault, and autofill them as you browse. Enter your server's address to log in; Bytewarden works with Bitwarden-compatible servers. Open source under GPLv3, independently maintained by Convex Works, and not affiliated with Bitwarden Inc.",
   "homepage": "https://github.com/Convex-Works/bytewarden",
-  "support": "https://github.com/Convex-Works/bytewarden/issues"
+  "support": "https://github.com/Convex-Works/bytewarden/issues",
+  "screenshots": [
+    "screenshots/01-vault.png",
+    "screenshots/02-your-server.png",
+    "screenshots/03-autofill.png",
+    "screenshots/04-passkeys.png",
+    "screenshots/05-open-source.png"
+  ],
+  "promoTiles": {
+    "small": "screenshots/promo-small-440x280.png",
+    "marquee": "screenshots/promo-marquee-1400x560.png"
+  },
+  "privacyPolicy": "https://github.com/Convex-Works/bytewarden/blob/main/PRIVACY.md"
 }

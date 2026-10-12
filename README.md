@@ -1,8 +1,8 @@
-<p align="center"><img src="branding/wordmark.svg" alt="Bytewarden" width="280" /></p>
+<p align="center"><img src="branding/lockup.svg" alt="Bytewarden" width="360" /></p>
 
 # Bytewarden
 
-A browser password manager by Convex Works, with a minimal black-and-white interface. Bytewarden is an independent GPLv3 fork of Bitwarden's open-source browser extension.
+A browser password manager by Convex Works. Its interface is set in ink and lit subpixels. Bytewarden is an independent GPLv3 fork of Bitwarden's open-source browser extension.
 
 ## Develop and build
 
@@ -25,7 +25,9 @@ The Chrome distribution archive is written to `apps/browser/dist/dist-chrome.zip
 
 ## Branding
 
-Claude Opus 5.5 designed the original Bytewarden keyhole **b**. The vector sources and design rationale are in `branding/`. Regenerate toolbar and store icons with `npm run branding:assets`; regenerate the icon font with `npm run icons:build`.
+The Bytewarden logo is the **pixel tile**: two strands of lit stripes that slip one scanline out of step. The wordmark is set in Doto, and the interface uses Inter on a green-tinted ink palette, with JetBrains Mono for passwords and codes. `branding/README.md` documents the sources, colours, and usage rules. Run `npm run branding:assets` to regenerate the toolbar, store, Safari, popup, and in-app logo assets, and `npm run icons:build` to rebuild the icon font.
+
+The theme stays a token layer (`libs/components/src/tw-theme.css` and `theme.css`) over upstream components, so upstream UI changes merge without restyling.
 
 Product names, local package namespaces, internal identifiers, translations, toolbar icons, popup logos, and autofill branding use Bytewarden. Upstream copyright notices, the GPL SDK package name, external server domains, native desktop protocol identifiers and companion-app names, and import format identifiers retain their original names for attribution and compatibility.
 

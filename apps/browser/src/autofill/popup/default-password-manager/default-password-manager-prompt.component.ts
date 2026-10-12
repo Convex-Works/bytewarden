@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { Router } from "@angular/router";
-import { firstValueFrom, map } from "rxjs";
+import { map } from "rxjs";
 
 import { AbstractThemingService } from "@bytewarden/angular/platform/services/theming/theming.service.abstraction";
 import { BytewardenLogo } from "@bytewarden/assets/svg";
@@ -30,7 +30,6 @@ import BrowserPopupUtils from "../../../platform/browser/browser-popup-utils";
 import { PopOutComponent } from "../../../platform/popup/components/pop-out.component";
 import { PopupHeaderComponent } from "../../../platform/popup/layout/popup-header.component";
 import { PopupPageComponent } from "../../../platform/popup/layout/popup-page.component";
-import { IntroCarouselService } from "../../../vault/popup/services/intro-carousel.service";
 import { applyDefaultPasswordManagerOverride } from "../../default-password-manager-session.util";
 import { AutofillBrowserSettingsService } from "../../services/autofill-browser-settings.service";
 
@@ -69,7 +68,6 @@ export class DefaultPasswordManagerPromptComponent implements OnInit {
   private readonly defaultPasswordManagerPromptService = inject(
     DefaultPasswordManagerPromptService,
   );
-  private readonly introCarouselService = inject(IntroCarouselService);
   private readonly autofillBrowserSettingsService = inject(AutofillBrowserSettingsService);
   private readonly configService = inject(ConfigService);
 
@@ -173,10 +171,6 @@ export class DefaultPasswordManagerPromptComponent implements OnInit {
   }
 
   private async navigateToNextScreen(): Promise<void> {
-    const introCarouselDismissed = await firstValueFrom(
-      this.introCarouselService.introCarouselState$,
-    );
-
-    await this.router.navigate([introCarouselDismissed ? "/login" : "/intro-carousel"]);
+    await this.router.navigate(["/login"]);
   }
 }

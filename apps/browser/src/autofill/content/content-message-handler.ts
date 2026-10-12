@@ -31,12 +31,16 @@ const windowMessageHandlers: ContentMessageWindowEventHandlers = {
  * is registered within a class. This is why these listeners are registered
  * at the top level of this file.
  */
-window.addEventListener("message", handleWindowMessageEvent, false);
-chrome.runtime.onMessage.addListener(handleExtensionMessage);
-setupExtensionDisconnectAction(() => {
-  window.removeEventListener("message", handleWindowMessageEvent);
-  chrome.runtime.onMessage.removeListener(handleExtensionMessage);
-});
+// Frames without extension APIs (e.g. sandboxed embeds reached by the all-frames re-injection on
+// install, or a context invalidated by an extension reload) have nothing to connect to.
+if (chrome.runtime?.onMessage) {
+  window.addEventListener("message", handleWindowMessageEvent, false);
+  chrome.runtime.onMessage.addListener(handleExtensionMessage);
+  setupExtensionDisconnectAction(() => {
+    window.removeEventListener("message", handleWindowMessageEvent);
+    chrome.runtime.onMessage.removeListener(handleExtensionMessage);
+  });
+}
 
 /**
  * Handles the post to the web vault showing the extension has been installed

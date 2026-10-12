@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Bytewarden branding preview</title>
+    <!-- Build the extension first (npm run build) so this page uses the real tokens and fonts. -->
     <link rel="stylesheet" href="../apps/browser/build/popup/main.css" />
     <style>
       * {
@@ -11,58 +12,57 @@
       }
       body {
         margin: 0;
-        background: #eeeeee;
-        font:
-          14px Inter,
-          Arial,
-          sans-serif;
-        color: #000;
+        background: #262a28;
+        font: 14px var(--font-sans);
+        color: #f4f6f5;
       }
       main {
-        max-width: 1000px;
+        max-width: 880px;
         margin: auto;
         padding: 48px 32px;
       }
-      h1 {
-        font-size: 28px;
-        letter-spacing: -1px;
-        margin: 0 0 8px;
+      .hero {
+        display: block;
+        width: 420px;
+        max-width: 100%;
+        margin: 0 0 12px;
       }
       .hint {
-        color: #525252;
+        color: #929b96;
         margin: 0 0 32px;
       }
       .panels {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 28px;
+        gap: 24px;
       }
       .panel {
-        background: var(--color-bg-primary);
+        background: rgb(var(--color-background-alt));
         color: var(--color-fg-heading);
         border: 1px solid var(--color-border-base);
         border-radius: 16px;
         overflow: hidden;
       }
       .panel header {
-        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
         border-bottom: 1px solid var(--color-border-base);
       }
-      svg {
-        width: 180px;
-        display: block;
-        fill: currentColor;
+      .panel header img {
+        width: 144px;
       }
       .panel section {
-        padding: 24px;
+        padding: 16px;
       }
       h2 {
-        font-size: 20px;
-        letter-spacing: -0.4px;
-        margin: 0 0 8px;
+        font-size: 18px;
+        margin: 0 0 4px;
       }
       p {
-        line-height: 1.6;
+        line-height: 1.5;
+        margin: 0;
       }
       .muted {
         color: var(--color-fg-body-subtle);
@@ -71,12 +71,13 @@
         display: block;
         font-size: 12px;
         font-weight: 600;
-        margin-top: 24px;
+        margin-top: 16px;
+        color: var(--color-fg-body);
       }
       input {
         display: block;
-        margin: 8px 0 16px;
-        padding: 12px;
+        margin: 6px 0 12px;
+        padding: 10px 12px;
         width: 100%;
         border: 1px solid var(--color-border-base);
         border-radius: 8px;
@@ -84,42 +85,89 @@
         color: var(--color-fg-heading);
         font: inherit;
       }
+      input:focus-visible {
+        outline: 2px solid var(--color-border-focus);
+        outline-offset: 1px;
+      }
+      .buttons {
+        display: flex;
+        gap: 8px;
+      }
       button {
-        width: 100%;
-        padding: 12px;
+        flex: 1;
+        padding: 10px;
+        border-radius: 999px;
+        font: 600 14px var(--font-sans);
+      }
+      .primary {
         border: 1px solid var(--color-border-brand);
-        border-radius: 8px;
         background: var(--color-bg-brand);
         color: var(--color-fg-contrast);
-        font:
-          600 14px Inter,
-          Arial,
-          sans-serif;
       }
-      button:focus-visible {
-        outline: 2px solid var(--color-fg-brand);
-        outline-offset: 3px;
+      .secondary {
+        border: 1px solid var(--color-border-base);
+        background: var(--color-bg-secondary);
+        color: var(--color-fg-heading);
       }
-      .icons {
-        margin: 32px 0;
+      .item {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 12px;
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgb(var(--color-background));
+      }
+      .item img {
+        width: 28px;
+        border-radius: 6px;
+      }
+      .item div {
+        flex: 1;
+      }
+      .password {
+        font-family: var(--font-mono);
+        color: var(--color-fg-heading);
+      }
+      .number {
+        color: rgb(var(--color-info-600));
+      }
+      .special {
+        color: var(--color-fg-danger);
+      }
+      .badges {
+        display: flex;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .badge {
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .brand {
+        background: var(--color-bg-brand-soft);
+        color: var(--color-fg-brand);
+      }
+      .danger {
+        background: var(--color-bg-danger-soft);
+        color: var(--color-fg-danger);
+      }
+      .icons {
+        display: flex;
+        align-items: end;
+        gap: 20px;
+        margin: 32px 0 8px;
       }
       .icons img {
-        image-rendering: auto;
+        image-rendering: pixelated;
       }
       .caption {
-        color: #525252;
+        color: #929b96;
         font-size: 12px;
       }
-      .theme_dark svg {
-        color: #fff;
-      }
-      @media (max-width: 640px) {
-        main {
-          padding: 24px 16px;
-        }
+      @media (max-width: 720px) {
         .panels {
           grid-template-columns: 1fr;
         }
@@ -128,108 +176,94 @@
   </head>
   <body>
     <main>
-      <h1>Bytewarden</h1>
-      <p class="hint">Logo and extension theme preview · Designed by Claude Opus 5.5</p>
+      <img class="hero" src="lockup.svg" alt="bytewarden" />
+      <p class="hint">Pixel tile, Doto wordmark, Inter interface, JetBrains Mono for passwords</p>
       <div class="panels">
         <article class="panel theme_light">
           <header>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 280 64"
-              role="img"
-              aria-label="Bytewarden"
-            >
-              <path
-                fill="currentColor"
-                fill-rule="evenodd"
-                d="M12 4H16A4 4 0 0 1 20 8V20H40A16 16 0 0 1 56 36V44A16 16 0 0 1 40 60H12A4 4 0 0 1 8 56V8A4 4 0 0 1 12 4ZM36 42.93A8 8 0 1 0 28 42.93V52H36Z"
-              />
-              <text
-                x="72"
-                y="43"
-                fill="currentColor"
-                font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-                font-size="32"
-                font-weight="600"
-                letter-spacing="-0.32"
-              >
-                bytewarden
-              </text>
-            </svg>
+            <img src="../apps/browser/src/popup/images/logo-dark@2x.png" alt="bytewarden" />
+            <span class="muted">Light</span>
           </header>
           <section>
-            <h2>Your vault, within reach.</h2>
-            <p class="muted">Passwords and passkeys in one secure place.</p>
-            <label
-              >Email address<input
-                type="email"
-                placeholder="you@example.com"
-                aria-label="Email address" /></label
-            ><button type="button">Continue</button>
-            <p class="muted">Light theme</p>
+            <h2>Log in to Bytewarden</h2>
+            <p class="muted">Passwords and passkeys in one vault.</p>
+            <label>Email address<input type="email" placeholder="you@example.com" /></label>
+            <div class="buttons">
+              <button class="primary" type="button">Continue</button
+              ><button class="secondary" type="button">Other options</button>
+            </div>
+            <div class="item">
+              <img src="icon.svg" alt="" />
+              <div>
+                <strong>github.com</strong>
+                <p class="password">
+                  s3cr<span class="number">7</span>t<span class="special">!</span>Pa<span
+                    class="number"
+                    >55</span
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge brand">Autofill</span><span class="badge danger">At risk</span>
+            </div>
           </section>
         </article>
         <article class="panel theme_dark">
           <header>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 280 64"
-              role="img"
-              aria-label="Bytewarden"
-            >
-              <path
-                fill="currentColor"
-                fill-rule="evenodd"
-                d="M12 4H16A4 4 0 0 1 20 8V20H40A16 16 0 0 1 56 36V44A16 16 0 0 1 40 60H12A4 4 0 0 1 8 56V8A4 4 0 0 1 12 4ZM36 42.93A8 8 0 1 0 28 42.93V52H36Z"
-              />
-              <text
-                x="72"
-                y="43"
-                fill="currentColor"
-                font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-                font-size="32"
-                font-weight="600"
-                letter-spacing="-0.32"
-              >
-                bytewarden
-              </text>
-            </svg>
+            <img src="../apps/browser/src/popup/images/logo-white@2x.png" alt="bytewarden" />
+            <span class="muted">Dark</span>
           </header>
           <section>
-            <h2>Your vault, within reach.</h2>
-            <p class="muted">Passwords and passkeys in one secure place.</p>
-            <label
-              >Email address<input
-                type="email"
-                placeholder="you@example.com"
-                aria-label="Email address" /></label
-            ><button type="button">Continue</button>
-            <p class="muted">Dark theme</p>
+            <h2>Log in to Bytewarden</h2>
+            <p class="muted">Passwords and passkeys in one vault.</p>
+            <label>Email address<input type="email" placeholder="you@example.com" /></label>
+            <div class="buttons">
+              <button class="primary" type="button">Continue</button
+              ><button class="secondary" type="button">Other options</button>
+            </div>
+            <div class="item">
+              <img src="icon.svg" alt="" />
+              <div>
+                <strong>github.com</strong>
+                <p class="password">
+                  s3cr<span class="number">7</span>t<span class="special">!</span>Pa<span
+                    class="number"
+                    >55</span
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="badges">
+              <span class="badge brand">Autofill</span><span class="badge danger">At risk</span>
+            </div>
           </section>
         </article>
       </div>
       <div class="icons">
+        <img src="../apps/browser/src/images/icon16.png" width="32" height="32" alt="16 px" />
         <img
-          src="../apps/browser/src/images/icon16.png"
-          width="16"
-          height="16"
-          alt="16 pixel toolbar icon"
-        /><img
-          src="../apps/browser/src/images/icon32.png"
+          src="../apps/browser/src/images/icon16_locked.png"
           width="32"
           height="32"
-          alt="32 pixel icon"
-        /><img
-          src="../apps/browser/src/images/icon48.png"
-          width="48"
-          height="48"
-          alt="48 pixel icon"
-        /><img src="icon.png" width="96" height="96" alt="Bytewarden icon" />
+          alt="16 px locked"
+        />
+        <img
+          src="../apps/browser/src/images/icon16_gray.png"
+          width="32"
+          height="32"
+          alt="16 px signed out"
+        />
+        <img src="../apps/browser/src/images/icon32.png" width="64" height="64" alt="32 px" />
+        <img src="../apps/browser/src/images/icon48.png" width="96" height="96" alt="48 px" />
+        <img
+          src="../apps/browser/src/images/icon128.png"
+          width="128"
+          height="128"
+          alt="Store icon"
+        />
       </div>
-      <p class="caption">
-        The preview uses the extension's actual logo and theme tokens. Form fields are visual
-        samples.
-      </p>
+      <p class="caption">Toolbar icons are shown at 2× to expose the pixel grid.</p>
     </main>
   </body>
 </html>

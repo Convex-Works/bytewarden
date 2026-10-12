@@ -200,9 +200,12 @@ export class DefaultRegisterSdkService implements RegisterSdkService {
   }
 
   private async toSettings(env: Environment): Promise<ClientSettings> {
+    const apiUrl = env.getApiUrl();
+    const identityUrl = env.getIdentityUrl();
     return {
-      apiUrl: env.getApiUrl(),
-      identityUrl: env.getIdentityUrl(),
+      // The SDK rejects null and undefined values, so omit the URLs until a server URL is entered.
+      ...(apiUrl != null ? { apiUrl } : {}),
+      ...(identityUrl != null ? { identityUrl } : {}),
       deviceType: toSdkDevice(this.platformUtilsService.getDevice()),
       userAgent: this.userAgent ?? navigator.userAgent,
       bitwardenClientVersion: await this.platformUtilsService.getApplicationVersionNumber(),

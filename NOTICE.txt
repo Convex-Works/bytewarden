@@ -16,5 +16,14 @@ Modifications made October 11, 2026:
 - Applied a monochrome interface and original Claude Opus 5.5 logo design.
 - Configured independent extension identifiers, documentation, and build workflow.
 
+Modifications made October 12, 2026:
+- Replaced the logo with the Bytewarden pixel tile and Doto wordmark.
+- Restyled the interface with the Bytewarden ink and subpixel palette; JetBrains Mono for fixed-width text.
+
+Bundled fonts, both under the SIL Open Font License 1.1:
+- JetBrains Mono, Copyright 2020 The JetBrains Mono Project Authors
+  (libs/components/src/webfonts/JetBrainsMono-OFL.txt)
+- Doto, Copyright 2024 The Doto Project Authors (branding/fonts/OFL.txt)
+
 Bitwarden trademarks identify the upstream project and compatible services only.
 Bytewarden is not affiliated with or endorsed by Bitwarden Inc.

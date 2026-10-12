@@ -1,5 +1,5 @@
 import { svg } from "../svg";
 
 export const ImportBytewardenIcon = svg`
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="24" height="24"><path class="tw-fill-marketing-logo" fill-rule="evenodd" d="M12 4H16A4 4 0 0 1 20 8V20H40A16 16 0 0 1 56 36V44A16 16 0 0 1 40 60H12A4 4 0 0 1 8 56V8A4 4 0 0 1 12 4ZM36 42.93A8 8 0 1 0 28 42.93V52H36Z"/></svg>
+  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="var(--color-mark-tile)" d="M3 0h42v3h3v42h-3v3H3v-3H0V3h3z"/><path fill="var(--color-mark-lime)" d="M9 6h2v12h-2zM24 6h2v12h-2z"/><path fill="var(--color-mark-aqua)" d="M12 6h2v12h-2zM27 6h2v12h-2z"/><path fill="var(--color-mark-pink)" d="M15 18h2v9h-2zM30 18h2v9h-2z"/><path fill="var(--color-mark-rose)" d="M18 18h2v9h-2zM33 18h2v9h-2z"/><path fill="var(--color-mark-cream)" d="M12 27h2v15h-2zM27 27h2v15h-2z"/><path fill="var(--color-mark-cyan)" d="M15 27h2v15h-2zM30 27h2v15h-2z"/></svg>
 `;

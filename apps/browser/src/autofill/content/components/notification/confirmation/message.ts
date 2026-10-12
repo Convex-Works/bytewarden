@@ -93,7 +93,7 @@ const baseTextStyles = css`
   text-align: left;
   text-overflow: ellipsis;
   line-height: 24px;
-  font-family: Inter, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
   font-size: 16px;
 `;
 

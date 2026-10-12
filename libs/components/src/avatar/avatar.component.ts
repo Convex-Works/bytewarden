@@ -33,7 +33,7 @@ const sizeClasses: Record<AvatarSize, string[]> = {
 export const defaultAvatarColors: Record<AvatarColor, string> = {
   teal: "#007c95",
   coral: "#c71800",
-  brand: "#175ddc",
+  brand: "#262a28",
   green: "#008236",
   purple: "#8200db",
 };
@@ -46,7 +46,7 @@ export const defaultAvatarColors: Record<AvatarColor, string> = {
 export const defaultAvatarHoverColors: Record<AvatarColor, string> = {
   teal: "#006278",
   coral: "#a81400",
-  brand: "#0d43af",
+  brand: "#3a403d",
   green: "#016630",
   purple: "#6e11b0",
 };

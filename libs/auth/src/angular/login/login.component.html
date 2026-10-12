@@ -1,5 +1,26 @@
 <form [bitSubmit]="submit" [formGroup]="formGroup">
   <div [ngClass]="{ 'tw-hidden': loginUiState !== LoginUiState.EMAIL_ENTRY }">
+    <!-- Server URL input -->
+    <bit-form-field>
+      <bit-label>{{ "baseUrl" | i18n }}</bit-label>
+      <input
+        id="login_input_server-url"
+        type="text"
+        inputmode="url"
+        formControlName="serverUrl"
+        bitInput
+        appInputVerbatim
+        autocomplete="url"
+        placeholder="https://vault.example.com"
+        [appAutofocus]="serverUrlMissing === true"
+        data-testid="login-server-url-input"
+        (input)="onServerUrlInput($event)"
+        (blur)="onServerUrlBlur()"
+        (keyup.enter)="ssoRequired ? handleSsoClick() : continuePressed()"
+      />
+      <bit-hint>{{ "serverUrlHint" | i18n }}</bit-hint>
+    </bit-form-field>
+
     <!-- Email Address input -->
     <bit-form-field>
       <bit-label>{{ "emailAddress" | i18n }}</bit-label>
@@ -8,7 +29,7 @@
         type="email"
         formControlName="email"
         bitInput
-        appAutofocus
+        [appAutofocus]="serverUrlMissing === false"
         data-testid="login-email-input"
         (input)="onEmailInput($event)"
         (keyup.enter)="ssoRequired ? handleSsoClick() : continuePressed()"

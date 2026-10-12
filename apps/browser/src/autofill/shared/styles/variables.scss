@@ -1,36 +1,36 @@
 $dark-icon-themes: "theme_dark";
 
-$font-family-sans-serif: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-source-code-pro: "Source Code Pro", monospace;
+$font-family-sans-serif: Inter, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-source-code-pro: "JetBrains Mono", ui-monospace, monospace;
 $font-size-base: 14px;
 
-$text-color-light: #000000;
-$muted-text-color-light: #525252;
+$text-color-light: #0b0c0c;
+$muted-text-color-light: #535b57;
 $background-color-light: #ffffff;
-$background-offset-color-light: #f0f0f0;
-$brand-primary-light: #000000;
-$password-special-color-light: #b80017;
-$password-number-color-light: #000000;
-$success-color-light: #017e45;
-$error-color-light: #c83522;
+$background-offset-color-light: #f4f6f5;
+$brand-primary-light: #0a7a34;
+$password-special-color-light: #c8102e;
+$password-number-color-light: #1f5bd6;
+$success-color-light: #0a7a34;
+$error-color-light: #c8102e;
 
-$text-color-dark: #ffffff;
-$muted-text-color-dark: #a3a3a3;
-$background-color-dark: #0a0a0a;
-$background-offset-color-dark: darken(#0a0a0a, 2.75%);
+$text-color-dark: #f4f6f5;
+$muted-text-color-dark: #929b96;
+$background-color-dark: #0b0c0c;
+$background-offset-color-dark: #141716;
 $border-color-dark: #ddd;
-$brand-primary-dark: #ffffff;
-$password-special-color-dark: #ff8d85;
-$password-number-color-dark: #ffffff;
-$success-color-dark: #8db89b;
-$error-color-dark: #ee9792;
+$brand-primary-dark: #3dff7a;
+$password-special-color-dark: #ff8fa3;
+$password-number-color-dark: #7aa6ff;
+$success-color-dark: #3dff7a;
+$error-color-dark: #ff3a5e;
 
-$muted-blue: #737373;
-$muted-grey: #a3a3a3;
-$border-color: #d4d4d4;
+$muted-blue: #6f7873;
+$muted-grey: #929b96;
+$border-color: #d6dbd8;
 
 $border-radius: 3px;
-$focus-outline-color: #404040;
+$focus-outline-color: #0a7a34;
 
 $themes: (
   light: (
@@ -59,10 +59,10 @@ $themes: (
     buttonPrimaryColor: $brand-primary-dark,
     primaryColor: $brand-primary-dark,
     textContrast: $background-color-dark,
-    inputBorderColor: #404040,
+    inputBorderColor: #262a28,
     inputBackgroundColor: $background-color-dark,
-    borderColor: #404040,
-    focusOutlineColor: lighten($focus-outline-color, 25%),
+    borderColor: #262a28,
+    focusOutlineColor: $brand-primary-dark,
     successColor: $success-color-dark,
     errorColor: $error-color-dark,
     passkeysAuthenticating: $muted-grey,

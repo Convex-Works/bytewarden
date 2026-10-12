@@ -16,7 +16,6 @@ jest.mock("../../default-password-manager-session.util", () => ({
 
 import { BrowserApi } from "../../../platform/browser/browser-api";
 import BrowserPopupUtils from "../../../platform/browser/browser-popup-utils";
-import { IntroCarouselService } from "../../../vault/popup/services/intro-carousel.service";
 import {
   applyDefaultPasswordManagerOverride,
   setDefaultPasswordManagerSessionState,
@@ -54,14 +53,12 @@ describe("DefaultPasswordManagerPromptComponent", () => {
   let mockRouter: MockProxy<Router>;
   let mockDialogService: MockProxy<DialogService>;
   let mockPromptService: MockProxy<DefaultPasswordManagerPromptService>;
-  let mockIntroCarouselService: MockProxy<IntroCarouselService>;
   let mockAutofillBrowserSettingsService: MockProxy<AutofillBrowserSettingsService>;
 
   beforeEach(async () => {
     mockRouter = mock<Router>();
     mockDialogService = mock<DialogService>();
     mockPromptService = mock<DefaultPasswordManagerPromptService>();
-    mockIntroCarouselService = mock<IntroCarouselService>();
     mockAutofillBrowserSettingsService = mock<AutofillBrowserSettingsService>();
 
     BrowserApi.isFirefox = false;
@@ -77,7 +74,6 @@ describe("DefaultPasswordManagerPromptComponent", () => {
     Object.defineProperty(mockRouter, "url", { value: "/" });
     Object.defineProperty(mockRouter, "events", { value: of() });
     mockPromptService.setPromptDismissed.mockResolvedValue(undefined);
-    Object.defineProperty(mockIntroCarouselService, "introCarouselState$", { value: of(false) });
     mockAutofillBrowserSettingsService.isDefaultPasswordManagerPromptFlowComplete.mockResolvedValue(
       false,
     );
@@ -95,7 +91,6 @@ describe("DefaultPasswordManagerPromptComponent", () => {
         provideNoopAnimations(),
         { provide: Router, useValue: mockRouter },
         { provide: DefaultPasswordManagerPromptService, useValue: mockPromptService },
-        { provide: IntroCarouselService, useValue: mockIntroCarouselService },
         { provide: AutofillBrowserSettingsService, useValue: mockAutofillBrowserSettingsService },
         {
           provide: AbstractThemingService,
@@ -130,7 +125,7 @@ describe("DefaultPasswordManagerPromptComponent", () => {
     await component["continueWithDefaultPasswordManagerApply"]();
 
     expect(callOrder).toEqual(["dismiss", "disable"]);
-    expect(mockRouter.navigate).toHaveBeenCalledWith(["/intro-carousel"]);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(["/login"]);
   });
 
   it("should request permission before pending state on Firefox popup continue", () => {
@@ -162,7 +157,7 @@ describe("DefaultPasswordManagerPromptComponent", () => {
     expect(BrowserApi.requestPermission).toHaveBeenCalledWith({ permissions: ["privacy"] });
     expect(applyDefaultPasswordManagerOverrideMock).toHaveBeenCalled();
     expect(setDefaultPasswordManagerSessionStateMock).not.toHaveBeenCalled();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(["/intro-carousel"]);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(["/login"]);
   });
 
   it("should show a dialog and navigate on Firefox popout continue when permission is denied", async () => {
@@ -175,7 +170,7 @@ describe("DefaultPasswordManagerPromptComponent", () => {
 
     expect(mockDialogService.openSimpleDialog).toHaveBeenCalled();
     expect(applyDefaultPasswordManagerOverrideMock).not.toHaveBeenCalled();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(["/intro-carousel"]);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(["/login"]);
   });
 
   it("should close the toolbar popup but not a popout on Firefox popup continue", async () => {
@@ -214,14 +209,14 @@ describe("DefaultPasswordManagerPromptComponent", () => {
     await component["continueWithDefaultPasswordManagerApply"]();
 
     expect(mockDialogService.openSimpleDialog).toHaveBeenCalled();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(["/intro-carousel"]);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(["/login"]);
   });
 
   it("should dismiss and navigate on skip", async () => {
     await component["onSkip"]();
 
     expect(mockPromptService.setPromptDismissed).toHaveBeenCalled();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(["/intro-carousel"]);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(["/login"]);
   });
 
   it("should advance when the apply flow completed while the popup was closed", async () => {
@@ -232,6 +227,6 @@ describe("DefaultPasswordManagerPromptComponent", () => {
     await component.ngOnInit();
 
     expect(mockPromptService.setPromptDismissed).toHaveBeenCalled();
-    expect(mockRouter.navigate).toHaveBeenCalledWith(["/intro-carousel"]);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(["/login"]);
   });
 });

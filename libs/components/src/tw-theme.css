@@ -20,67 +20,67 @@
    * Use these for existing components until migration is complete.
    * ======================================== */
 
-  --color-transparent-hover: rgb(0 0 0 / 0.02);
-  --color-shadow: 163 163 163;
+  --color-transparent-hover: rgb(11 12 12 / 0.02);
+  --color-shadow: 146 155 150;
 
   --color-background: 255 255 255;
-  --color-background-alt: 245 245 245;
-  --color-background-alt2: 23 23 23;
-  --color-background-alt3: 10 10 10;
-  --color-background-alt4: 0 0 0;
+  --color-background-alt: 244 246 245;
+  --color-background-alt2: 20 23 22;
+  --color-background-alt3: 11 12 12;
+  --color-background-alt4: 11 12 12;
 
-  --color-primary-100: 245 245 245;
-  --color-primary-300: 163 163 163;
-  --color-primary-600: 0 0 0;
-  --color-primary-700: 64 64 64;
+  --color-primary-100: 210 254 223;
+  --color-primary-300: 111 248 155;
+  --color-primary-600: 10 122 52;
+  --color-primary-700: 8 98 42;
 
-  --color-secondary-100: 245 245 245;
-  --color-secondary-300: 212 212 212;
-  --color-secondary-500: 115 115 115;
-  --color-secondary-600: 82 82 82;
-  --color-secondary-700: 64 64 64;
+  --color-secondary-100: 232 236 234;
+  --color-secondary-300: 180 188 184;
+  --color-secondary-500: 111 120 115;
+  --color-secondary-600: 83 91 87;
+  --color-secondary-700: 58 64 61;
 
-  --color-info-100: 245 245 245;
-  --color-info-600: 163 163 163;
-  --color-info-700: 38 38 38;
+  --color-info-100: 230 238 255;
+  --color-info-600: 61 125 255;
+  --color-info-700: 31 91 214;
 
   --color-warning-100: 255 244 212;
   --color-warning-600: 255 191 0;
   --color-warning-700: 142 64 0;
 
-  --color-danger-100: 255 236 239;
-  --color-danger-600: 203 38 58;
-  --color-danger-700: 149 27 42;
+  --color-danger-100: 255 224 230;
+  --color-danger-600: 200 16 46;
+  --color-danger-700: 160 14 39;
 
-  --color-success-100: 213 243 216;
-  --color-success-600: 12 128 24;
-  --color-success-700: 8 81 15;
+  --color-success-100: 210 254 223;
+  --color-success-600: 10 122 52;
+  --color-success-700: 8 98 42;
 
-  --color-notification-100: 255 225 247;
-  --color-notification-600: 192 17 118;
+  --color-notification-100: 255 224 230;
+  --color-notification-600: 200 16 46;
 
-  --color-text-main: 0 0 0;
-  --color-text-muted: 82 82 82;
+  --color-text-main: 11 12 12;
+  --color-text-muted: 83 91 87;
   --color-text-contrast: 255 255 255;
   --color-text-alt2: 255 255 255;
-  --color-text-code: 64 64 64;
+  --color-text-code: 58 64 61;
 
-  --color-hover-default: rgb(0 0 0 / 0.06);
+  --color-hover-default: rgb(11 12 12 / 0.05);
   --color-hover-contrast: rgb(255 255 255 / 0.15);
 
-  --color-marketing-logo: 0 0 0;
-  --color-bw-blue: 0 0 0;
+  --color-marketing-logo: 11 12 12;
+  --color-bw-blue: 10 122 52;
 
   --tw-ring-offset-color: #ffffff;
 
   --tw-sm-breakpoint: 640px;
 
-  --color-illustration-outline: 0 0 0;
-  --color-illustration-bg-primary: 245 245 245;
-  --color-illustration-bg-secondary: 212 212 212;
+  --color-illustration-outline: 11 12 12;
+  --color-illustration-bg-primary: 232 236 234;
+  --color-illustration-bg-secondary: 214 219 216;
   --color-illustration-bg-tertiary: 255 255 255;
-  --color-illustration-tertiary: 255 191 0;
-  --color-illustration-logo: 0 0 0;
+  --color-illustration-tertiary: 61 255 122;
+  --color-illustration-logo: 11 12 12;
 
   /* ========================================
    * NEW COLOR PALETTE (Hex format)
@@ -89,51 +89,51 @@
    * Format: --color-{family}-{shade} where shade ranges from 050 to 950
    * ======================================== */
 
-  /* Brand Colors */
-  --color-brand-050: #fafafa;
-  --color-brand-100: #f5f5f5;
-  --color-brand-200: #e5e5e5;
-  --color-brand-300: #d4d4d4;
-  --color-brand-400: #a3a3a3;
-  --color-brand-500: #737373;
-  --color-brand-600: #404040;
-  --color-brand-700: #000000;
-  --color-brand-700-rgb: 0, 0, 0;
-  --color-brand-800: #171717;
-  --color-brand-900: #0a0a0a;
-  --color-brand-950: #000000;
-  --color-brand-800-rgb: 23, 23, 23;
-  --color-brand-950-rgb: 0, 0, 0;
+  /* Brand Colors: the mark's green subpixel (#3DFF7A) at 400 */
+  --color-brand-050: #ecfff2;
+  --color-brand-100: #d2fedf;
+  --color-brand-200: #a8fbc2;
+  --color-brand-300: #6ff89b;
+  --color-brand-400: #3dff7a;
+  --color-brand-500: #19e35f;
+  --color-brand-600: #0fb24a;
+  --color-brand-700: #0a7a34;
+  --color-brand-700-rgb: 10, 122, 52;
+  --color-brand-800: #08622a;
+  --color-brand-900: #0a4a22;
+  --color-brand-950: #052a13;
+  --color-brand-800-rgb: 8, 98, 42;
+  --color-brand-950-rgb: 5, 42, 19;
 
-  /* Gray Colors */
-  --color-gray-050: #fafafa;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #e5e5e5;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #a3a3a3;
-  --color-gray-400-rgb: 163, 163, 163;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-700-rgb: 64, 64, 64;
-  --color-gray-800: #171717;
-  --color-gray-800-rgb: 23, 23, 23;
-  --color-gray-900: #0a0a0a;
-  --color-gray-950: #000000;
-  --color-gray-950-rgb: 0, 0, 0;
+  /* Gray Colors: green-tinted ink, from the tile (#0B0C0C) and wordmark (#6F7873, #F4F6F5) */
+  --color-gray-050: #f4f6f5;
+  --color-gray-100: #e8ecea;
+  --color-gray-200: #d6dbd8;
+  --color-gray-300: #b4bcb8;
+  --color-gray-400: #929b96;
+  --color-gray-400-rgb: 146, 155, 150;
+  --color-gray-500: #6f7873;
+  --color-gray-600: #535b57;
+  --color-gray-700: #3a403d;
+  --color-gray-700-rgb: 58, 64, 61;
+  --color-gray-800: #262a28;
+  --color-gray-800-rgb: 38, 42, 40;
+  --color-gray-900: #141716;
+  --color-gray-950: #0b0c0c;
+  --color-gray-950-rgb: 11, 12, 12;
 
-  /* Red Colors */
-  --color-red-050: #fef2f2;
-  --color-red-100: #ffe2e2;
-  --color-red-200: #ffc9c9;
-  --color-red-300: #ffa2a2;
-  --color-red-400: #ff6467;
-  --color-red-500: #fb2c36;
-  --color-red-600: #e7000b;
-  --color-red-700: #c10007;
-  --color-red-800: #9f0712;
-  --color-red-900: #791112;
-  --color-red-950: #460809;
+  /* Red Colors: the mark's red subpixel (#FF3A5E) at 400 */
+  --color-red-050: #fff1f3;
+  --color-red-100: #ffe0e6;
+  --color-red-200: #ffc2cd;
+  --color-red-300: #ff8fa3;
+  --color-red-400: #ff3a5e;
+  --color-red-500: #f01f47;
+  --color-red-600: #db0f38;
+  --color-red-700: #c8102e;
+  --color-red-800: #a00e27;
+  --color-red-900: #7a0f22;
+  --color-red-950: #45050f;
 
   /* Orange Colors */
   --color-orange-050: #fff8f1;
@@ -231,6 +231,16 @@
   --color-white-rgb: 255, 255, 255;
   --color-black: #000000;
   --color-black-rgb: 0, 0, 0;
+
+  /* Bytewarden logo: the same in every theme (see branding/README.md) */
+  --color-mark-tile: #0b0c0c;
+  --color-mark-byte: #6f7873;
+  --color-mark-lime: #b1e0a1;
+  --color-mark-aqua: #5efde6;
+  --color-mark-pink: #ffb8ff;
+  --color-mark-rose: #ffacbc;
+  --color-mark-cream: #e9ffd4;
+  --color-mark-cyan: #7cffff;
 
   /* ========================================
    * SEMANTIC FOREGROUND COLORS (Light Mode)
@@ -445,7 +455,7 @@
   --color-border-accent-tertiary: var(--color-purple-600);
 
   /* Focus Border */
-  --color-border-focus: var(--color-black);
+  --color-border-focus: var(--color-brand-700);
   --color-border-focus-contrast: var(--color-white);
 
   /**========================================
@@ -459,8 +469,8 @@
   --color-nav-border-focus: var(--color-white);
 
   /* Brand family — Password Manager, Secrets Manager */
-  --color-nav-bg-brand-soft: var(--color-brand-800);
-  --color-nav-bg-brand: var(--color-brand-950);
+  --color-nav-bg-brand-soft: var(--color-gray-800);
+  --color-nav-bg-brand: var(--color-gray-950);
   --color-nav-bg-brand-hover: rgba(var(--color-brand-700-rgb), 0.25);
 
   /* Admin family — Admin Console, Provider Portal, Business Unit Portal */
@@ -471,15 +481,15 @@
   /* Original variant tokens — retained for the default side-nav (see [data-nav-version="default"]) */
   --color-nav-fg-primary: var(--color-white);
   --color-nav-fg-secondary: var(--color-gray-900);
-  --color-nav-bg-primary: var(--color-brand-800);
+  --color-nav-bg-primary: var(--color-gray-900);
   --color-nav-bg-secondary: var(--color-gray-100);
-  --color-nav-bg-primary-strong: var(--color-brand-900);
+  --color-nav-bg-primary-strong: var(--color-gray-950);
   --color-nav-bg-secondary-strong: var(--color-gray-300);
   --color-nav-bg-primary-hover: rgba(var(--color-black-rgb), 0.2);
   --color-nav-bg-secondary-hover: rgba(var(--color-brand-950-rgb), 0.1);
   --color-nav-bg-primary-hover-strong: rgba(var(--color-black-rgb), 0.45);
   --color-nav-bg-secondary-hover-strong: rgba(var(--color-brand-950-rgb), 0.25);
-  --color-nav-border-primary: var(--color-brand-700);
+  --color-nav-border-primary: var(--color-gray-800);
   --color-nav-border-secondary: var(--color-gray-200);
   --color-nav-border-primary-focus: var(--color-white);
   --color-nav-border-secondary-focus: var(--color-black);
@@ -490,65 +500,65 @@
 }
 
 .theme_dark {
-  --color-transparent-hover: rgb(255 255 255 / 0.02);
+  --color-transparent-hover: rgb(244 246 245 / 0.02);
   --color-shadow: 0 0 0;
 
-  --color-background: 10 10 10;
-  --color-background-alt: 23 23 23;
-  --color-background-alt2: 38 38 38;
-  --color-background-alt3: 23 23 23;
-  --color-background-alt4: 0 0 0;
+  --color-background: 20 23 22;
+  --color-background-alt: 11 12 12;
+  --color-background-alt2: 38 42 40;
+  --color-background-alt3: 20 23 22;
+  --color-background-alt4: 11 12 12;
 
-  --color-primary-100: 38 38 38;
-  --color-primary-300: 82 82 82;
-  --color-primary-600: 255 255 255;
-  --color-primary-700: 212 212 212;
+  --color-primary-100: 5 42 19;
+  --color-primary-300: 15 178 74;
+  --color-primary-600: 61 255 122;
+  --color-primary-700: 111 248 155;
 
-  --color-secondary-100: 38 38 38;
-  --color-secondary-300: 64 64 64;
-  --color-secondary-500: 115 115 115;
-  --color-secondary-600: 163 163 163;
-  --color-secondary-700: 212 212 212;
+  --color-secondary-100: 38 42 40;
+  --color-secondary-300: 58 64 61;
+  --color-secondary-500: 111 120 115;
+  --color-secondary-600: 146 155 150;
+  --color-secondary-700: 214 219 216;
 
-  --color-success-100: 8 81 15;
-  --color-success-600: 107 241 120;
-  --color-success-700: 213 243 216;
+  --color-success-100: 5 42 19;
+  --color-success-600: 61 255 122;
+  --color-success-700: 210 254 223;
 
-  --color-danger-100: 149 27 42;
-  --color-danger-600: 255 78 99;
-  --color-danger-700: 255 236 239;
+  --color-danger-100: 69 5 15;
+  --color-danger-600: 255 58 94;
+  --color-danger-700: 255 224 230;
 
   --color-warning-100: 142 64 0;
   --color-warning-600: 255 191 0;
   --color-warning-700: 255 244 212;
 
-  --color-info-100: 38 38 38;
-  --color-info-600: 163 163 163;
-  --color-info-700: 245 245 245;
+  --color-info-100: 16 33 74;
+  --color-info-600: 122 166 255;
+  --color-info-700: 230 238 255;
 
-  --color-notification-100: 117 37 83;
-  --color-notification-600: 255 143 208;
+  --color-notification-100: 69 5 15;
+  --color-notification-600: 255 58 94;
 
-  --color-text-main: 255 255 255;
-  --color-text-muted: 163 163 163;
-  --color-text-contrast: 10 10 10;
-  --color-text-alt2: 255 255 255;
-  --color-text-code: 212 212 212;
+  --color-text-main: 244 246 245;
+  --color-text-muted: 146 155 150;
+  --color-text-contrast: 11 12 12;
+  --color-text-alt2: 244 246 245;
+  --color-text-code: 214 219 216;
 
-  --color-hover-default: rgb(255 255 255 / 0.08);
-  --color-hover-contrast: rgb(0 0 0 / 0.15);
+  --color-hover-default: rgb(244 246 245 / 0.06);
+  --color-hover-contrast: rgb(11 12 12 / 0.15);
 
-  --color-marketing-logo: 255 255 255;
-  --color-bw-blue: 255 255 255;
+  --color-marketing-logo: 244 246 245;
+  --color-bw-blue: 61 255 122;
 
-  --tw-ring-offset-color: #0a0a0a;
+  --tw-ring-offset-color: #0b0c0c;
 
-  --color-illustration-outline: 255 255 255;
-  --color-illustration-bg-primary: 38 38 38;
-  --color-illustration-bg-secondary: 82 82 82;
-  --color-illustration-bg-tertiary: 245 245 245;
-  --color-illustration-tertiary: 255 191 0;
-  --color-illustration-logo: 255 255 255;
+  --color-illustration-outline: 244 246 245;
+  --color-illustration-bg-primary: 38 42 40;
+  --color-illustration-bg-secondary: 58 64 61;
+  --color-illustration-bg-tertiary: 244 246 245;
+  --color-illustration-tertiary: 61 255 122;
+  --color-illustration-logo: 244 246 245;
 
   /* ========================================
    * SEMANTIC FOREGROUND COLORS (Dark Mode Overrides)
@@ -593,9 +603,9 @@
 
   /* Neutral Background */
   --color-bg-primary: var(--color-gray-900);
-  --color-bg-secondary: var(--color-gray-800);
+  --color-bg-secondary: var(--color-gray-950);
   --color-bg-tertiary: var(--color-gray-950);
-  --color-bg-quaternary: var(--color-gray-700);
+  --color-bg-quaternary: var(--color-gray-800);
   --color-bg-inactive: var(--color-gray-950);
 
   /* Gray Background */
@@ -725,7 +735,7 @@
   /* Neutral Border */
   --color-border-muted: var(--color-gray-900);
   --color-border-light: var(--color-gray-800);
-  --color-border-base: var(--color-gray-700);
+  --color-border-base: var(--color-gray-800);
   --color-border-strong: var(--color-gray-500);
   --color-border-stronger: var(--color-gray-400);
   --color-border-buffer: var(--color-gray-950);
@@ -884,17 +894,22 @@
   }
 }
 
-/* Bytewarden dark-mode action contrast. */
+/* Bytewarden dark mode: the brand is the lit green subpixel on ink, with ink text on it. */
 .theme_dark {
-  --color-fg-brand-soft: #d4d4d4;
-  --color-fg-brand: #ffffff;
-  --color-fg-brand-strong: #f5f5f5;
-  --color-bg-brand-softer: #171717;
-  --color-bg-brand-soft: #262626;
-  --color-bg-brand-medium: #404040;
-  --color-bg-brand: #ffffff;
-  --color-bg-brand-strong: #e5e5e5;
-  --color-bg-brand-stronger: #d4d4d4;
-  --color-border-brand: #ffffff;
-  --color-border-brand-strong: #e5e5e5;
+  --color-fg-brand-soft: var(--color-brand-600);
+  --color-fg-brand: var(--color-brand-400);
+  --color-fg-brand-strong: var(--color-brand-300);
+  --color-bg-brand-softer: var(--color-brand-950);
+  --color-bg-brand-soft: var(--color-brand-950);
+  --color-bg-brand-medium: var(--color-brand-900);
+  --color-bg-brand: var(--color-brand-400);
+  --color-bg-brand-strong: var(--color-brand-300);
+  --color-bg-brand-stronger: var(--color-brand-200);
+  --color-border-brand-soft: var(--color-brand-900);
+  --color-border-brand: var(--color-brand-400);
+  --color-border-brand-strong: var(--color-brand-300);
+  --color-border-focus: var(--color-brand-400);
+  --color-fg-danger: var(--color-red-400);
+  --color-bg-danger: var(--color-red-400);
+  --color-border-danger: var(--color-red-400);
 }

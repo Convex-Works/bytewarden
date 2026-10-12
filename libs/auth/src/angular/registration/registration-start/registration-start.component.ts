@@ -30,7 +30,6 @@ import {
 } from "@bytewarden/components";
 
 import { LoginEmailService } from "../../../common";
-import { RegistrationEnvSelectorComponent } from "../registration-env-selector/registration-env-selector.component";
 
 // FIXME: update to use a const object instead of a typescript enum
 // eslint-disable-next-line @bytewarden/platform/no-enums
@@ -61,7 +60,6 @@ const DEFAULT_MARKETING_EMAILS_PREF_BY_REGION: Record<Region, boolean> = {
     ButtonModule,
     LinkModule,
     SvgModule,
-    RegistrationEnvSelectorComponent,
   ],
 })
 export class RegistrationStartComponent implements OnInit, OnDestroy {
@@ -72,7 +70,8 @@ export class RegistrationStartComponent implements OnInit, OnDestroy {
   state: RegistrationStartState = RegistrationStartState.USER_DATA_ENTRY;
   RegistrationStartState = RegistrationStartState;
 
-  isSelfHost = false;
+  // Bytewarden always registers on the server the user entered at login.
+  isSelfHost = true;
 
   formGroup = this.formBuilder.group({
     email: ["", [Validators.required, Validators.email]],

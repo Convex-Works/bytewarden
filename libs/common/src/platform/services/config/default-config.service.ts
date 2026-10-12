@@ -230,6 +230,12 @@ export class DefaultConfigService implements ConfigService {
     environment: Environment,
     fallbackConfig: ServerConfig | null,
   ): Promise<void> {
+    // Nothing to fetch until the user has entered a server URL
+    if (environment.getApiUrl() == null) {
+      this.failedFetchFallbackSubject.next(fallbackConfig);
+      return;
+    }
+
     try {
       // Feature flags often have a big impact on user experience, lets ensure we return some value
       // somewhat quickly even though it may not be accurate, we won't cancel the HTTP request

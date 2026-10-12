@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, RouteReuseStrategy, RouterModule, Routes } from
 
 import { AuthenticationTimeoutComponent } from "@bytewarden/angular/auth/components/authentication-timeout.component";
 import { AuthRoute } from "@bytewarden/angular/auth/constants";
-import { EnvironmentSelectorComponent } from "@bytewarden/angular/auth/environment-selector/environment-selector.component";
 import {
   activeAuthGuard,
   authGuard,
@@ -89,7 +88,6 @@ import { AtRiskPasswordsComponent } from "../vault/popup/components/at-risk-pass
 import { AddEditComponent } from "../vault/popup/components/vault/add-edit/add-edit.component";
 import { AssignCollections } from "../vault/popup/components/vault/assign-collections/assign-collections.component";
 import { AttachmentsComponent } from "../vault/popup/components/vault/attachments/attachments.component";
-import { IntroCarouselComponent } from "../vault/popup/components/vault/intro-carousel/intro-carousel.component";
 import { NewItemPageComponent } from "../vault/popup/components/vault/new-item-page/new-item-page.component";
 import { PasswordHistoryComponent } from "../vault/popup/components/vault/vault-password-history/vault-password-history.component";
 import { VaultComponent } from "../vault/popup/components/vault/vault.component";
@@ -100,7 +98,6 @@ import {
   hasAtRiskPasswords,
 } from "../vault/popup/guards/at-risk-passwords.guard";
 import { clearVaultStateGuard } from "../vault/popup/guards/clear-vault-state.guard";
-import { IntroCarouselGuard } from "../vault/popup/guards/intro-carousel.guard";
 import { AdminSettingsComponent } from "../vault/popup/settings/admin-settings.component";
 import { AppearanceComponent } from "../vault/popup/settings/appearance.component";
 import { ArchiveComponent } from "../vault/popup/settings/archive.component";
@@ -427,6 +424,7 @@ const routes: Routes = [
           footerVerticalPadding: "compact",
           heroTextAlignment: "left",
           hideFooter: true,
+          showReadonlyHostname: true,
         } satisfies RouteDataProperties & ExtensionAnonLayoutWrapperData,
         children: [
           {
@@ -468,11 +466,7 @@ const routes: Routes = [
       },
       {
         path: AuthRoute.Login,
-        canActivate: [
-          unauthGuardFn(unauthRouteOverrides),
-          DefaultPasswordManagerPromptGuard,
-          IntroCarouselGuard,
-        ],
+        canActivate: [unauthGuardFn(unauthRouteOverrides), DefaultPasswordManagerPromptGuard],
         data: {
           pageTitle: {
             key: "loginPageEmailEntryScreenTitle",
@@ -488,11 +482,6 @@ const routes: Routes = [
         children: [
           { path: "", component: LoginComponent },
           { path: "", component: LoginSecondaryContentComponent, outlet: "secondary" },
-          {
-            path: "",
-            component: EnvironmentSelectorComponent,
-            outlet: "environment-selector",
-          },
         ],
       },
       {
@@ -509,15 +498,9 @@ const routes: Routes = [
           footerVerticalPadding: "compact",
           heroTextAlignment: "left",
           secondaryContentLocation: "footer",
+          showReadonlyHostname: true,
         } satisfies RouteDataProperties & ExtensionAnonLayoutWrapperData,
-        children: [
-          { path: "", component: LoginViaWebAuthnComponent },
-          {
-            path: "",
-            component: EnvironmentSelectorComponent,
-            outlet: "environment-selector",
-          },
-        ],
+        children: [{ path: "", component: LoginViaWebAuthnComponent }],
       },
       {
         path: AuthRoute.Sso,
@@ -531,15 +514,9 @@ const routes: Routes = [
             key: "singleSignOnEnterOrgIdentifierText",
           },
           elevation: 1,
+          showReadonlyHostname: true,
         } satisfies RouteDataProperties & ExtensionAnonLayoutWrapperData,
-        children: [
-          { path: "", component: SsoComponent },
-          {
-            path: "",
-            component: EnvironmentSelectorComponent,
-            outlet: "environment-selector",
-          },
-        ],
+        children: [{ path: "", component: SsoComponent }],
       },
       {
         path: AuthRoute.LoginWithDevice,
@@ -554,15 +531,9 @@ const routes: Routes = [
           },
           showBackButton: true,
           elevation: 1,
+          showReadonlyHostname: true,
         } satisfies RouteDataProperties & ExtensionAnonLayoutWrapperData,
-        children: [
-          { path: "", component: LoginViaAuthRequestComponent },
-          {
-            path: "",
-            component: EnvironmentSelectorComponent,
-            outlet: "environment-selector",
-          },
-        ],
+        children: [{ path: "", component: LoginViaAuthRequestComponent }],
       },
       {
         path: AuthRoute.PasswordHint,
@@ -577,15 +548,9 @@ const routes: Routes = [
           pageIcon: UserLockIcon,
           showBackButton: true,
           elevation: 1,
+          showReadonlyHostname: true,
         } satisfies RouteDataProperties & ExtensionAnonLayoutWrapperData,
-        children: [
-          { path: "", component: PasswordHintComponent },
-          {
-            path: "",
-            component: EnvironmentSelectorComponent,
-            outlet: "environment-selector",
-          },
-        ],
+        children: [{ path: "", component: PasswordHintComponent }],
       },
       {
         path: AuthRoute.AdminApprovalRequested,
@@ -710,22 +675,8 @@ const routes: Routes = [
     canActivate: [],
     data: { elevation: 0, doNotSaveUrl: true } satisfies RouteDataProperties,
   },
-  {
-    path: "intro-carousel",
-    component: ExtensionAnonLayoutWrapperComponent,
-    canActivate: [],
-    data: { elevation: 0, doNotSaveUrl: true } satisfies RouteDataProperties,
-    children: [
-      {
-        path: "",
-        component: IntroCarouselComponent,
-        data: {
-          pageIcon: null,
-          hideFooter: true,
-        } satisfies ExtensionAnonLayoutWrapperData,
-      },
-    ],
-  },
+  // Bytewarden opens straight on the login screen; keep the old intro path working.
+  { path: "intro-carousel", redirectTo: "login" },
   {
     path: "confirm-key-connector-domain",
     component: ExtensionAnonLayoutWrapperComponent,

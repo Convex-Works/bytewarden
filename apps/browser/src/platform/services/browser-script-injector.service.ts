@@ -59,10 +59,12 @@ export class BrowserScriptInjectorService extends ScriptInjectorService {
         });
       } catch (error) {
         // Swallow errors for host permissions, since this is believed to be a Manifest V3 Chrome bug
-        // @TODO remove when the bugged behaviour is resolved
+        // @TODO remove when the bugged behaviour is resolved.
+        // Chromium also refuses to script its extension store pages, which are ordinary https tabs.
         if (
           error.message !==
-          "Cannot access contents of the page. Extension manifest must request permission to access the respective host."
+            "Cannot access contents of the page. Extension manifest must request permission to access the respective host." &&
+          error.message !== "The extensions gallery cannot be scripted."
         ) {
           throw error;
         }

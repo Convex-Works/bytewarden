@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bytewarden store screenshots</title>
+    <!--
+      Chrome Web Store screenshots (1280 × 800) and promo tiles. Popup images in shots/ are real
+      captures: the vault and tab bar from Storybook, the login screen from the built extension.
+      Render with `node scripts/branding/render-store-screenshots.mjs`.
+    -->
+    <style>
+      @font-face {
+        font-family: Inter;
+        src: url("../../libs/components/src/webfonts/inter.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("../../libs/components/src/webfonts/jetbrains-mono.woff2") format("woff2");
+        font-weight: 100 800;
+      }
+      :root {
+        --ink: #0b0c0c;
+        --ink-2: #141716;
+        --ink-3: #1b1e1d;
+        --edge: #262a28;
+        --muted: #929b96;
+        --byte: #6f7873;
+        --paper: #f4f6f5;
+        --green: #3dff7a;
+        --red: #ff3a5e;
+        --blue: #3d7dff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #000;
+        font-family: Inter, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .slide {
+        position: relative;
+        width: 1280px;
+        height: 800px;
+        overflow: hidden;
+        color: var(--paper);
+        background:
+          radial-gradient(circle at 1px 1px, rgb(244 246 245 / 0.07) 1px, transparent 1.5px) 0 0 /
+            24px 24px,
+          var(--ink);
+        margin-bottom: 40px;
+      }
+      /* Soft phosphor glow behind the product, echoing the lit stripes. */
+      .slide::before {
+        content: "";
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        right: -180px;
+        top: -60px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgb(61 255 122 / 0.13),
+          rgb(94 253 230 / 0.06) 40%,
+          transparent 68%
+        );
+      }
+      .slide.left-glow::before {
+        right: auto;
+        left: -200px;
+      }
+      .brand {
+        position: absolute;
+        left: 96px;
+        top: 72px;
+        width: 210px;
+      }
+      .copy {
+        position: absolute;
+        left: 96px;
+        top: 50%;
+        transform: translateY(-46%);
+        width: 500px;
+      }
+      .copy.right {
+        left: auto;
+        right: 96px;
+        width: 470px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 54px;
+        line-height: 1.12;
+        font-weight: 650;
+        letter-spacing: -1.4px;
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--green);
+      }
+      .sub {
+        margin: 24px 0 0;
+        font-size: 21px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 32px;
+      }
+      .chip {
+        font:
+          600 15px "JetBrains Mono",
+          monospace;
+        padding: 9px 14px;
+        border: 1px solid var(--edge);
+        border-radius: 999px;
+        background: rgb(20 23 22 / 0.8);
+      }
+      .chip i {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+        background: var(--green);
+        box-shadow: 0 0 10px var(--green);
+      }
+      /* Browser window with the extension popup hanging from the toolbar icon. */
+      .browser {
+        position: absolute;
+        right: 72px;
+        top: 96px;
+        width: 560px;
+        height: 760px;
+        border-radius: 16px 16px 0 0;
+        background: var(--ink-2);
+        border: 1px solid var(--edge);
+        box-shadow: 0 40px 120px rgb(0 0 0 / 0.6);
+      }
+      .browser.left {
+        right: auto;
+        left: 72px;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        height: 56px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--edge);
+      }
+      .dots {
+        display: flex;
+        gap: 7px;
+      }
+      .dots span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #2f3532;
+      }
+      .address {
+        flex: 1;
+        height: 32px;
+        border-radius: 999px;
+        background: var(--ink-3);
+        color: var(--muted);
+        font:
+          14px/32px Inter,
+          sans-serif;
+        padding-left: 16px;
+      }
+      .ext-icon {
+        width: 28px;
+        height: 28px;
+        image-rendering: pixelated;
+        border-radius: 6px;
+        outline: 2px solid rgb(61 255 122 / 0.5);
+        outline-offset: 3px;
+      }
+      .popup {
+        position: absolute;
+        right: 16px;
+        top: 68px;
+        width: 380px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--edge);
+        box-shadow: 0 24px 60px rgb(0 0 0 / 0.55);
+        transform-origin: top right;
+        transform: scale(var(--zoom, 1.18));
+        background: var(--ink);
+      }
+      .popup img {
+        display: block;
+        width: 380px;
+      }
+      .popup .vault {
+        height: 539px;
+        object-fit: cover;
+        object-position: top;
+      }
+      /* Website sign-in form with the inline autofill menu. */
+      .site {
+        position: absolute;
+        right: 72px;
+        top: 96px;
+        width: 620px;
+        height: 760px;
+        border-radius: 16px 16px 0 0;
+        background: #f4f6f5;
+        border: 1px solid var(--edge);
+        box-shadow: 0 40px 120px rgb(0 0 0 / 0.6);
+        overflow: hidden;
+      }
+      .site .toolbar {
+        background: var(--ink-2);
+      }
+      .signin {
+        width: 380px;
+        margin: 64px auto 0;
+        color: #0b0c0c;
+      }
+      .signin .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 22px;
+        letter-spacing: -0.4px;
+      }
+      .signin .logo span {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #ff9a3d, #ff3a5e);
+      }
+      .signin h2 {
+        margin: 28px 0 22px;
+        font-size: 26px;
+        letter-spacing: -0.5px;
+      }
+      .field {
+        margin-bottom: 18px;
+      }
+      .field label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #3a403d;
+      }
+      .input {
+        position: relative;
+        height: 46px;
+        border: 1.5px solid #b4bcb8;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 16px;
+        line-height: 43px;
+        padding-left: 14px;
+        color: #6f7873;
+      }
+      .input.focus {
+        border-color: #0b0c0c;
+        box-shadow: 0 0 0 3px rgb(11 12 12 / 0.12);
+      }
+      .input img {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        width: 20px;
+        height: 20px;
+        image-rendering: pixelated;
+      }
+      .submit {
+        height: 46px;
+        border-radius: 10px;
+        background: #0b0c0c;
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+        line-height: 46px;
+        margin-top: 26px;
+      }
+      .inline-menu {
+        position: absolute;
+        left: 120px;
+        top: 318px;
+        width: 380px;
+        background: var(--ink-2);
+        border: 1px solid var(--edge);
+        border-radius: 12px;
+        box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
+        padding: 8px;
+        color: var(--paper);
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px 12px;
+        border-radius: 8px;
+      }
+      .row.active {
+        background: rgb(244 246 245 / 0.06);
+      }
+      .row .tile {
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 15px;
+        color: #fff;
+      }
+      .row .name {
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .row .user {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .row .grow {
+        flex: 1;
+        min-width: 0;
+      }
+      .row .fill {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+        background: var(--green);
+        border-radius: 999px;
+        padding: 6px 12px;
+      }
+      .menu-footer {
+        border-top: 1px solid var(--edge);
+        margin: 6px -8px -8px;
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--green);
+      }
+      /* Passkey picker, styled with the popup's tokens. */
+      .passkey {
+        background: var(--ink);
+      }
+      .passkey header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 61px;
+        padding: 0 16px;
+        background: var(--ink-2);
+        border-bottom: 1px solid var(--edge);
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .passkey header img {
+        width: 24px;
+        height: 24px;
+        image-rendering: pixelated;
+      }
+      .passkey section {
+        padding: 18px 16px 8px;
+      }
+      .passkey h3 {
+        margin: 0 0 12px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .passkey .card {
+        background: var(--ink-2);
+        border: 1px solid var(--edge);
+        border-radius: 12px;
+        margin-bottom: 10px;
+      }
+      .passkey .link {
+        padding: 10px 16px 24px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--green);
+      }
+      .passkey .key {
+        font:
+          12px "JetBrains Mono",
+          monospace;
+        color: var(--muted);
+        border: 1px solid var(--edge);
+        border-radius: 6px;
+        padding: 3px 8px;
+      }
+      /* Promo tiles */
+      .tile-small,
+      .tile-marquee {
+        position: relative;
+        overflow: hidden;
+        color: var(--paper);
+        background:
+          radial-gradient(circle at 1px 1px, rgb(244 246 245 / 0.08) 1px, transparent 1.5px) 0 0 /
+            16px 16px,
+          var(--ink);
+        margin-bottom: 40px;
+      }
+      .tile-small {
+        width: 440px;
+        height: 280px;
+      }
+      .tile-marquee {
+        width: 1400px;
+        height: 560px;
+      }
+      .tile-small::before,
+      .tile-marquee::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(circle at 50% 45%, rgb(61 255 122 / 0.14), transparent 45%);
+      }
+      .center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .tagline {
+        font:
+          600 15px "JetBrains Mono",
+          monospace;
+        color: var(--muted);
+        margin-top: 22px;
+        letter-spacing: 0.2px;
+      }
+      .tile-marquee .tagline {
+        font-size: 24px;
+        margin-top: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Vault -->
+    <section class="slide" id="slide-1">
+      <img class="brand" src="../../apps/browser/src/popup/images/logo-white@2x.png" alt="" />
+      <div class="copy">
+        <h1>Store passwords, passkeys, and cards in an <em>encrypted vault</em>.</h1>
+        <p class="sub">Everything you save is encrypted on your device before it syncs.</p>
+      </div>
+      <div class="browser" style="--zoom: 1.06">
+        <div class="toolbar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="address">github.com/login</div>
+          <img class="ext-icon" src="../../apps/browser/src/images/icon32.png" alt="" />
+        </div>
+        <div class="popup">
+          <img class="vault" src="shots/vault-dark.png" alt="" />
+          <img src="shots/nav-dark.png" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Your server -->
+    <section class="slide" id="slide-2">
+      <img class="brand" src="../../apps/browser/src/popup/images/logo-white@2x.png" alt="" />
+      <div class="copy">
+        <h1>Your vault, on <em>the server you choose</em>.</h1>
+        <p class="sub">
+          Enter your server's address and log in. Bytewarden works with Bitwarden-compatible
+          servers.
+        </p>
+      </div>
+      <div class="browser">
+        <div class="toolbar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="address">vault.example.com</div>
+          <img class="ext-icon" src="../../apps/browser/src/images/icon32.png" alt="" />
+        </div>
+        <div class="popup">
+          <img src="shots/login-dark.png" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Autofill -->
+    <section class="slide" id="slide-3">
+      <img class="brand" src="../../apps/browser/src/popup/images/logo-white@2x.png" alt="" />
+      <div class="copy" style="width: 440px">
+        <h1>Autofill logins <em>right in the page</em>.</h1>
+        <p class="sub">
+          Click the Bytewarden icon in any login field to pick an account and sign in.
+        </p>
+      </div>
+      <div class="site">
+        <div class="toolbar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="address">northwind.example/sign-in</div>
+          <img class="ext-icon" src="../../apps/browser/src/images/icon32.png" alt="" />
+        </div>
+        <div class="signin">
+          <div class="logo"><span></span>Northwind</div>
+          <h2>Sign in to your account</h2>
+          <div class="field">
+            <label>Email</label>
+            <div class="input focus">
+              <img src="shots/inline-icon.svg" alt="" />
+            </div>
+          </div>
+          <div class="field" style="margin-top: 196px">
+            <label>Password</label>
+            <div class="input"></div>
+          </div>
+          <div class="submit">Sign in</div>
+        </div>
+        <div class="inline-menu">
+          <div class="row active">
+            <div class="tile" style="background: #0a7a34">N</div>
+            <div class="grow">
+              <div class="name">Northwind</div>
+              <div class="user">alex.rivera@gmail.com</div>
+            </div>
+            <div class="fill">Fill</div>
+          </div>
+          <div class="row">
+            <div class="tile" style="background: #3a403d">N</div>
+            <div class="grow">
+              <div class="name">Northwind — work</div>
+              <div class="user">jordan.chen@proton.me</div>
+            </div>
+          </div>
+          <div class="menu-footer">+ New login</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Passkeys -->
+    <section class="slide" id="slide-4">
+      <img class="brand" src="../../apps/browser/src/popup/images/logo-white@2x.png" alt="" />
+      <div class="copy">
+        <h1>Passwordless sign-in with <em>passkeys</em>.</h1>
+        <p class="sub">Save passkeys to your vault and use them on any site that supports them.</p>
+      </div>
+      <div class="browser">
+        <div class="toolbar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="address">northwind.example/sign-in</div>
+          <img class="ext-icon" src="../../apps/browser/src/images/icon32.png" alt="" />
+        </div>
+        <div class="popup passkey">
+          <header>
+            Log in with passkey?
+            <img src="shots/inline-icon.svg" alt="" />
+          </header>
+          <section>
+            <h3>Choose a passkey to log in with</h3>
+            <div class="card">
+              <div class="row">
+                <div class="tile" style="background: #0a7a34">N</div>
+                <div class="grow">
+                  <div class="name">Northwind</div>
+                  <div class="user">alex.rivera@gmail.com</div>
+                </div>
+                <span class="key">passkey</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="row">
+                <div class="tile" style="background: #3a403d">N</div>
+                <div class="grow">
+                  <div class="name">Northwind — work</div>
+                  <div class="user">jordan.chen@proton.me</div>
+                </div>
+                <span class="key">passkey</span>
+              </div>
+            </div>
+          </section>
+          <div class="link">Use your device or hardware key</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Security -->
+    <section class="slide left-glow" id="slide-5">
+      <img
+        class="brand"
+        style="left: auto; right: 96px"
+        src="../../apps/browser/src/popup/images/logo-white@2x.png"
+        alt=""
+      />
+      <div class="copy right">
+        <h1>End-to-end encrypted and <em>open source</em>.</h1>
+        <p class="sub">Zero-knowledge encryption, single sign-on, and code you can read.</p>
+        <div class="chips">
+          <span class="chip"><i></i>GPLv3</span>
+          <span class="chip"><i></i>Zero-knowledge</span>
+          <span class="chip"><i></i>SSO</span>
+          <span class="chip"><i></i>Passkeys</span>
+        </div>
+      </div>
+      <div class="browser left">
+        <div class="toolbar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="address">github.com/Convex-Works/bytewarden</div>
+          <img class="ext-icon" src="../../apps/browser/src/images/icon32.png" alt="" />
+        </div>
+        <div class="popup">
+          <img src="shots/login-light.png" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Small promo tile (440 × 280) -->
+    <section class="tile-small" id="tile-small">
+      <div class="center">
+        <img
+          src="../../apps/browser/src/popup/images/logo-white@2x.png"
+          style="width: 300px"
+          alt=""
+        />
+        <div class="tagline">open-source · your server</div>
+      </div>
+    </section>
+
+    <!-- Marquee promo tile (1400 × 560) -->
+    <section class="tile-marquee" id="tile-marquee">
+      <div class="center">
+        <img
+          src="../../apps/browser/src/popup/images/logo-white@2x.png"
+          style="width: 720px"
+          alt=""
+        />
+        <div class="tagline">open-source password manager · your server</div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -42,7 +42,8 @@
     "build": "npm run build:prod:chrome --workspace @bytewarden/browser",
     "build:firefox": "npm run build:prod:firefox --workspace @bytewarden/browser",
     "dist": "npm run dist:chrome --workspace @bytewarden/browser",
-    "branding:assets": "node scripts/branding/generate-assets.mjs"
+    "branding:assets": "node scripts/branding/generate-assets.mjs",
+    "branding:store": "node scripts/branding/render-store-screenshots.mjs"
   },
   "workspaces": [
     "apps/browser",

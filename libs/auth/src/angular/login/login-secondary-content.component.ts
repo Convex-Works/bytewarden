@@ -19,6 +19,16 @@ import { LinkModule } from "@bytewarden/components";
         "createAccount" | i18n
       }}</a>
     </div>
+    <div class="tw-text-center tw-mt-2">
+      <a
+        bitLink
+        href="https://github.com/Convex-Works/bytewarden"
+        target="_blank"
+        rel="noreferrer"
+        data-testid="login-source-code-link"
+        >{{ "viewSourceOnGitHub" | i18n }}</a
+      >
+    </div>
   `,
 })
 export class LoginSecondaryContentComponent {

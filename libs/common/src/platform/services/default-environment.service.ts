@@ -79,67 +79,10 @@ export const USER_CLOUD_REGION_KEY = new UserKeyDefinition<CloudRegion>(
 );
 
 /**
- * The production regions available for selection.
- *
- * In the future we desire to load these urls from the config endpoint.
+ * Bytewarden doesn't offer hosted regions. Every environment is the server URL the user enters,
+ * stored under the `Region.SelfHosted` key.
  */
-export const PRODUCTION_REGIONS: RegionConfig[] = [
-  {
-    key: Region.US,
-    domain: "bitwarden.com",
-    urls: {
-      base: null,
-      api: "https://api.bitwarden.com",
-      identity: "https://identity.bitwarden.com",
-      icons: "https://icons.bitwarden.net",
-      webVault: "https://vault.bitwarden.com",
-      notifications: "https://notifications.bitwarden.com",
-      events: "https://events.bitwarden.com",
-      scim: "https://scim.bitwarden.com",
-      send: "https://send.bitwarden.com",
-    },
-  },
-  {
-    key: Region.EU,
-    domain: "bitwarden.eu",
-    urls: {
-      base: null,
-      api: "https://api.bitwarden.eu",
-      identity: "https://identity.bitwarden.eu",
-      icons: "https://icons.bitwarden.eu",
-      webVault: "https://vault.bitwarden.eu",
-      notifications: "https://notifications.bitwarden.eu",
-      events: "https://events.bitwarden.eu",
-      scim: "https://scim.bitwarden.eu",
-      send: "https://vault.bitwarden.eu",
-    },
-  },
-  {
-    key: Region.Gov,
-    domain: "bytewarden-gov.com",
-    urls: {
-      base: null,
-      api: "https://api.bitwarden-gov.com",
-      identity: "https://identity.bitwarden-gov.com",
-      icons: "https://icons.bitwarden-gov.com",
-      webVault: "https://vault.bitwarden-gov.com",
-      notifications: "https://notifications.bitwarden-gov.com",
-      events: "https://events.bitwarden-gov.com",
-      scim: "https://scim.bitwarden-gov.com",
-      send: "https://send.bitwarden-gov.com",
-    },
-  },
-];
-
-/**
- * The default region when starting the app.
- */
-const DEFAULT_REGION = Region.US;
-
-/**
- * The default region configuration.
- */
-const DEFAULT_REGION_CONFIG = PRODUCTION_REGIONS.find((r) => r.key === DEFAULT_REGION);
+export const PRODUCTION_REGIONS: RegionConfig[] = [];
 
 export class DefaultEnvironmentService implements EnvironmentService {
   private globalState: GlobalState<EnvironmentState | null>;
@@ -214,7 +157,7 @@ export class DefaultEnvironmentService implements EnvironmentService {
             return config.urls.webVault;
           }
         }
-        return DEFAULT_REGION_CONFIG.urls.webVault;
+        return null;
       }),
     );
   }
@@ -236,9 +179,10 @@ export class DefaultEnvironmentService implements EnvironmentService {
       region = Region.SelfHosted;
     }
 
-    // If self-hosted ensure urls are valid else fallback to default region
+    // Clearing the server URL leaves the environment unconfigured
     if (region == Region.SelfHosted && isEmpty(urls)) {
-      region = DEFAULT_REGION;
+      await this.globalState.update(() => ({ region: Region.SelfHosted, urls: null }));
+      return null;
     }
 
     if (region != Region.SelfHosted) {
@@ -289,11 +233,6 @@ export class DefaultEnvironmentService implements EnvironmentService {
       region = Region.SelfHosted;
     }
 
-    // If self-hosted ensure urls are valid else fallback to default region
-    if (region == Region.SelfHosted && isEmpty(urls)) {
-      region = DEFAULT_REGION;
-    }
-
     // Load urls from region config
     if (region != Region.SelfHosted) {
       const regionConfig = this.getRegionConfig(region);
@@ -302,7 +241,7 @@ export class DefaultEnvironmentService implements EnvironmentService {
       }
     }
 
-    return new SelfHostedEnvironment(urls);
+    return new SelfHostedEnvironment(urls ?? {});
   }
 
   async setCloudRegion(userId: UserId | null, region: CloudRegion) {
@@ -482,12 +421,13 @@ abstract class UrlEnvironment implements Environment {
       return this.urls.base + baseSuffix;
     }
 
-    // For self-hosted environments, try to use webVault URL as base before falling back to production
+    // For self-hosted environments, try to use webVault URL as base
     if (this.region === Region.SelfHosted && this.urls.webVault) {
       return this.urls.webVault + baseSuffix;
     }
 
-    return DEFAULT_REGION_CONFIG.urls[key];
+    // No server URL has been entered yet
+    return null;
   }
 }
 

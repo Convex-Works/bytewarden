@@ -9,7 +9,14 @@ import {
   ViewChild,
 } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from "@angular/forms";
 import { ActivatedRoute, Params, Router, RouterModule } from "@angular/router";
 import { firstValueFrom, Subject, take, takeUntil, skip, combineLatest, startWith } from "rxjs";
 
@@ -32,7 +39,10 @@ import { ClientType, HttpStatusCode } from "@bytewarden/common/enums";
 import { ErrorResponse } from "@bytewarden/common/models/response/error.response";
 import { AppIdService } from "@bytewarden/common/platform/abstractions/app-id.service";
 import { BroadcasterService } from "@bytewarden/common/platform/abstractions/broadcaster.service";
-import { EnvironmentService } from "@bytewarden/common/platform/abstractions/environment.service";
+import {
+  EnvironmentService,
+  Region,
+} from "@bytewarden/common/platform/abstractions/environment.service";
 import { I18nService } from "@bytewarden/common/platform/abstractions/i18n.service";
 import { LogService } from "@bytewarden/common/platform/abstractions/log.service";
 import { MessagingService } from "@bytewarden/common/platform/abstractions/messaging.service";
@@ -103,9 +113,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   isKnownDevice = false;
   loginUiState: LoginUiState = LoginUiState.EMAIL_ENTRY;
   ssoRequired = false;
+  /** Null until the stored environment is read; decides which field gets initial focus. */
+  serverUrlMissing: boolean | null = null;
 
   formGroup = this.formBuilder.group(
     {
+      serverUrl: [
+        "",
+        [Validators.required, (control: AbstractControl) => this.validateUrl(control)],
+      ],
       email: ["", [Validators.required, Validators.email]],
       masterPassword: [
         "",
@@ -196,6 +212,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    * any further init that would be torn down immediately.
    */
   private async defaultOnInit(): Promise<boolean> {
+    await this.loadServerUrl();
+
     const params = await firstValueFrom(this.activatedRoute.queryParams);
     const paramEmailIsSet = this.applyEmailFromQueryParams(params);
 
@@ -623,6 +641,10 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param mpEntryLayoutOverride See {@link continuePressed}.
    */
   protected async continue(mpEntryLayoutOverride?: Partial<AnonLayoutWrapperData>): Promise<void> {
+    if (!(await this.applyServerUrl())) {
+      return;
+    }
+
     const isEmailValid = this.validateEmail();
     if (!isEmailValid) {
       return;
@@ -722,6 +744,9 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param event - The event object.
    */
   async handleLoginWithPasskeyClick() {
+    if (!(await this.applyServerUrl())) {
+      return;
+    }
     await this.router.navigate(["/login-with-passkey"]);
   }
 
@@ -730,6 +755,10 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param event - The event object.
    */
   async handleSsoClick() {
+    if (!(await this.applyServerUrl())) {
+      return;
+    }
+
     // Make sure the email is valid
     const isEmailValid = this.validateEmail();
     if (!isEmailValid) {
@@ -851,6 +880,81 @@ export class LoginComponent implements OnInit, OnDestroy {
       await this.continue();
     }
   };
+
+  /**
+   * Pre-fills the server URL from the stored environment.
+   */
+  private async loadServerUrl(): Promise<void> {
+    const urls = (await firstValueFrom(this.environmentService.globalEnvironment$)).getUrls();
+    const serverUrl = urls.base ?? urls.webVault ?? "";
+    this.formGroup.controls.serverUrl.setValue(serverUrl);
+    this.serverUrlMissing = serverUrl === "";
+  }
+
+  /**
+   * Validates the server URL and, when it changed, makes it the environment for this login.
+   * @returns true if the server URL is valid, false otherwise.
+   */
+  protected async applyServerUrl(): Promise<boolean> {
+    const control = this.formGroup.controls.serverUrl;
+    control.markAsTouched();
+    control.updateValueAndValidity({ onlySelf: true, emitEvent: true });
+    if (!control.valid || !control.value) {
+      return false;
+    }
+
+    const serverUrl = this.normalizeUrl(control.value);
+    const urls = (await firstValueFrom(this.environmentService.globalEnvironment$)).getUrls();
+    // Keep any custom per-service URLs (e.g. from managed settings) when the address is unchanged
+    if (serverUrl !== urls.base && serverUrl !== urls.webVault) {
+      await this.environmentService.setEnvironment(Region.SelfHosted, { base: serverUrl });
+    }
+    control.setValue(serverUrl);
+    return true;
+  }
+
+  /**
+   * Set the server URL value from the input field. Like the email, it's only validated on submit.
+   * @param event The event object from the input field.
+   */
+  onServerUrlInput(event: Event) {
+    this.formGroup.controls.serverUrl.setValue((event.target as HTMLInputElement).value);
+  }
+
+  /**
+   * Apply a valid server URL as soon as the user leaves the field, so links such as
+   * "Create account" use it. Invalid input waits for submit to show its error.
+   */
+  async onServerUrlBlur() {
+    if (
+      this.formGroup.controls.serverUrl.value &&
+      this.validateUrl(this.formGroup.controls.serverUrl) == null
+    ) {
+      await this.applyServerUrl();
+    }
+  }
+
+  /** Adds https:// when no scheme is given and drops trailing slashes. */
+  private normalizeUrl(value: string): string {
+    const trimmed = value.trim().replace(/\/+$/, "");
+    return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+  }
+
+  private validateUrl(control: AbstractControl): ValidationErrors | null {
+    const value = control.value as string | null;
+    if (!value) {
+      return null;
+    }
+
+    const url = Utils.getUrl(this.normalizeUrl(value));
+    if (url == null || url.hostname === "") {
+      return { invalidServerUrl: { message: this.i18nService.t("invalidServerUrl") } };
+    }
+    if (url.protocol !== "https:" && !this.platformUtilsService.isDev()) {
+      return { onlyHttpsAllowed: { message: this.i18nService.t("selfHostedEnvMustUseHttps") } };
+    }
+    return null;
+  }
 
   /**
    * Validates the email and displays any validation errors.

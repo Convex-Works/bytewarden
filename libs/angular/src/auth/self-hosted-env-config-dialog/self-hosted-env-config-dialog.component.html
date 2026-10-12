@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" [bitSubmit]="submit" bit-dialog>
-  <span bitDialogTitle> Self-hosted environment</span>
+  <span bitDialogTitle>{{ "selfHostedEnvironment" | i18n }}</span>
   <ng-container bitDialogContent>
     <bit-form-field>
       <bit-label>{{ "baseUrl" | i18n }}</bit-label>

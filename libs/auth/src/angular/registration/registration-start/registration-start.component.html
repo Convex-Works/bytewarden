@@ -1,9 +1,5 @@
 <ng-container *ngIf="state === RegistrationStartState.USER_DATA_ENTRY">
   <form [formGroup]="formGroup" [bitSubmit]="submit">
-    <auth-registration-env-selector
-      (selectedRegionChange)="handleSelectedRegionChange($event)"
-    ></auth-registration-env-selector>
-
     <bit-form-field>
       <bit-label>{{ "emailAddress" | i18n }}</bit-label>
       <input
@@ -53,7 +49,8 @@
       {{ "continue" | i18n }}
     </button>
 
-    <p bitTypography="helper" class="tw-text-main tw-text-xs tw-mb-0">
+    <!-- Bitwarden's terms only apply to its hosted service -->
+    <p *ngIf="!isSelfHost" bitTypography="helper" class="tw-text-main tw-text-xs tw-mb-0">
       {{ "byContinuingYouAgreeToThe" | i18n }}
       <a
         bitLink
