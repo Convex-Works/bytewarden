@@ -109,17 +109,6 @@ describe("legacyCompatKeyService", () => {
   });
 
   describe("makeSendKey", () => {
-    const mockRandomBytes = new Uint8Array(16) as CsprngArray;
-    it("calls keyGenerationService with expected hard coded parameters", async () => {
-      await legacyCompatKeyService.makeSendKey(mockRandomBytes);
-
-      expect(keyGenerationService.deriveKeyFromMaterial).toHaveBeenCalledWith(
-        mockRandomBytes,
-        "bitwarden-send",
-        "send",
-      );
-    });
-
     it("derives the same key as the SDK and other Bitwarden clients", async () => {
       // The salt is part of the Send encryption format, so a fixed seed must always map to
       // this key. Changing it breaks Sends shared with every other Bitwarden-compatible client.

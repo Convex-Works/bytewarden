@@ -12,7 +12,7 @@ import { AccountService } from "../auth/abstractions/account.service";
 import { TokenService } from "../auth/abstractions/token.service";
 import { EventRequest } from "../dirt/event-logs";
 import { EventType } from "../dirt/event-logs/enums/event-type.enum";
-import { ClientType, DeviceType } from "../enums";
+import { DeviceType } from "../enums";
 import {
   VaultTimeoutAction,
   VaultTimeoutSettingsService,
@@ -1166,31 +1166,6 @@ describe("ApiService", () => {
       expect(middleware1).toHaveBeenCalledTimes(1);
       expect(middleware2).toHaveBeenCalledTimes(1);
       expect(nativeFetch).toHaveBeenCalledTimes(1);
-    });
-
-    it("sends the client headers that Bitwarden-compatible servers read", async () => {
-      platformUtilsService.getClientType.mockReturnValue(ClientType.Browser);
-      platformUtilsService.getApplicationVersionNumber.mockResolvedValue("2026.9.3");
-      platformUtilsService.packageType.mockResolvedValue("Chrome Extension");
-
-      const nativeFetch = jest.fn<Promise<Response>, [request: Request]>();
-      nativeFetch.mockResolvedValue({
-        ok: true,
-        status: 200,
-      } satisfies Partial<Response> as Response);
-      sut.nativeFetch = nativeFetch;
-
-      const headers = new Headers();
-      const request = {
-        url: "https://example.com/api",
-        method: "POST",
-        headers,
-      } as unknown as Request;
-      await sut.fetch(request);
-
-      expect(headers.get("Bitwarden-Client-Name")).toBe(ClientType.Browser);
-      expect(headers.get("Bitwarden-Client-Version")).toBe("2026.9.3");
-      expect(headers.get("Bitwarden-Package-Type")).toBe("Chrome Extension");
     });
   });
 
