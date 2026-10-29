@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "__MSG_extName__",
   "short_name": "Bytewarden",
-  "version": "2026.9.4",
+  "version": "2026.9.5",
   "description": "__MSG_extDesc__",
   "default_locale": "en",
   "author": "Convex Works",
