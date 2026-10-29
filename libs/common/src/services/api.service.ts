@@ -1379,14 +1379,14 @@ export class ApiService implements ApiServiceAbstraction {
   }
 
   private async applyPlatformHeaders(headers: Headers): Promise<void> {
-    headers.set("Bytewarden-Client-Name", this.platformUtilsService.getClientType());
+    headers.set("Bitwarden-Client-Name", this.platformUtilsService.getClientType());
     headers.set(
-      "Bytewarden-Client-Version",
+      "Bitwarden-Client-Version",
       await this.platformUtilsService.getApplicationVersionNumber(),
     );
     const packageType = await this.platformUtilsService.packageType();
     if (packageType != null) {
-      headers.set("Bytewarden-Package-Type", packageType);
+      headers.set("Bitwarden-Package-Type", packageType);
     }
   }
 

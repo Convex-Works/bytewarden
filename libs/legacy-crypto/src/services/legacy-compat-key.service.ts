@@ -193,7 +193,7 @@ export class DefaultLegacyCompatKeyService implements LegacyCompatKeyServiceAbst
   async makeSendKey(keyMaterial: CsprngArray): Promise<SymmetricCryptoKey> {
     return await this.keyGenerationService.deriveKeyFromMaterial(
       keyMaterial,
-      "bytewarden-send",
+      "bitwarden-send",
       "send",
     );
   }

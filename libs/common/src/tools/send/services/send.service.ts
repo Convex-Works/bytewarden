@@ -37,7 +37,7 @@ import { SendStateProvider } from "./send-state.provider.abstraction";
 import { InternalSendService as InternalSendServiceAbstraction } from "./send.service.abstraction";
 
 export class SendService implements InternalSendServiceAbstraction {
-  readonly sendKeySalt = "bytewarden-send";
+  readonly sendKeySalt = "bitwarden-send";
   readonly sendKeyPurpose = "send";
 
   sends$ = this.stateProvider.encryptedState$.pipe(

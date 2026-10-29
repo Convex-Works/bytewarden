@@ -28,8 +28,10 @@ import { KeyGenerationService } from "../abstractions/key-generation.service";
 import { EncString } from "../models/enc-string";
 import { KdfConfig } from "../models/kdf-config";
 import { SymmetricCryptoKey } from "../models/symmetric-crypto-key";
+import { NodeCryptoFunctionService } from "../node/node-crypto-function.service";
 import { CsprngArray } from "../types/csprng";
 
+import { DefaultKeyGenerationService } from "./default-key-generation.service";
 import { DefaultLegacyCompatKeyService } from "./legacy-compat-key.service";
 
 describe("legacyCompatKeyService", () => {
@@ -107,14 +109,26 @@ describe("legacyCompatKeyService", () => {
   });
 
   describe("makeSendKey", () => {
-    const mockRandomBytes = new Uint8Array(16) as CsprngArray;
-    it("calls keyGenerationService with expected hard coded parameters", async () => {
-      await legacyCompatKeyService.makeSendKey(mockRandomBytes);
+    it("derives the same key as the SDK and other Bitwarden clients", async () => {
+      // The salt is part of the Send encryption format, so a fixed seed must always map to
+      // this key. Changing it breaks Sends shared with every other Bitwarden-compatible client.
+      const nodeCryptoFunctionService = new NodeCryptoFunctionService();
+      const sut = new DefaultLegacyCompatKeyService(
+        masterPasswordService,
+        new DefaultKeyGenerationService(nodeCryptoFunctionService),
+        nodeCryptoFunctionService,
+        encryptService,
+        logService,
+        accountService,
+        kdfConfigService,
+        keyService,
+      );
+      const seed = Uint8Array.from({ length: 16 }, (_, i) => i) as CsprngArray;
 
-      expect(keyGenerationService.deriveKeyFromMaterial).toHaveBeenCalledWith(
-        mockRandomBytes,
-        "bytewarden-send",
-        "send",
+      const key = await sut.makeSendKey(seed);
+
+      expect(key.toBase64()).toBe(
+        "BjqVWhwBtOGqy3zTWckZssthBBwMBclMDrdvuanhRLP77KB03hQ3oaIzCtKDMTir874lYaOjCuHzPhXhovfKBA==",
       );
     });
   });
