@@ -1,0 +1,49 @@
+name: Release Bytewarden Browser
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Verify tag matches versions
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          for file in apps/browser/package.json apps/browser/src/manifest.json apps/browser/src/manifest.v3.json; do
+            actual="$(jq -r .version "$file")"
+            if [ "$actual" != "$version" ]; then
+              echo "::error file=$file::version is $actual, tag is $GITHUB_REF_NAME"
+              exit 1
+            fi
+          done
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run test:types
+      - run: npm test -- --selectProjects browser --runInBand --coverage=false
+      - run: npm run dist
+      - run: npm run dist:firefox --workspace @bytewarden/browser
+      - name: Package
+        working-directory: apps/browser/dist
+        run: |
+          mv dist-chrome.zip "bytewarden-chrome-$VERSION.zip"
+          mv dist-firefox.zip "bytewarden-firefox-$VERSION.zip"
+          sha256sum ./*.zip > SHA256SUMS
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            apps/browser/dist/*.zip apps/browser/dist/SHA256SUMS \
+            --title "Bytewarden $VERSION" \
+            --generate-notes \
+            --verify-tag
